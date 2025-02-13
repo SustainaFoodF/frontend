@@ -1,0 +1,117 @@
+/* profile.css */
+
+/* Styles généraux pour la page */
+.profile-page {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.profile-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.profile-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profile-subtitle {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.profile-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.form-group input:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.profile-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.profile-button:hover {
+    background-color: #0056b3;
+}
+
+.social-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-button {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.social-button:hover {
+    background-color: #007bff;
+}
+
+.logout-link {
+    margin-top: 20px;
+}
+
+.logout-link a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.logout-link a:hover {
+    text-decoration: underline;
+}

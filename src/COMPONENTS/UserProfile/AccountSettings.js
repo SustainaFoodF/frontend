@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './AccountSettings.css'
+import './AccountSettings.css';
 import loginImage from '../../pages/user-profile-icon-symbol-template-free-vector.jpg';
 
 const AccountSettings = () => {
@@ -35,6 +35,7 @@ const AccountSettings = () => {
                 console.log("✅ Données utilisateur récupérées :", data);
 
                 if (data.success && data.user) {
+                    console.log("📸 Image récupérée :", data.user.image);
                     setUser(data.user);
                 } else {
                     throw new Error("Les données utilisateur sont invalides.");
@@ -54,6 +55,21 @@ const AccountSettings = () => {
             ...prevUser,
             [name]: value,
         }));
+    };
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                console.log("📸 Image convertie en Base64 :", reader.result);
+                setUser((prevUser) => ({
+                    ...prevUser,
+                    image: reader.result, // Stocke l’image en Base64
+                }));
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleSaveChanges = async () => {
@@ -94,10 +110,27 @@ const AccountSettings = () => {
         {error && <p className="error-message">{error}</p>}
         {successMessage && <p className="success-message">{successMessage}</p>}
 
-        {/* 📌 Image de profil */}
+        {/* 📌 Image de profil avec upload */}
         <div className="profile-image-container">
-            <img src={user?.imageUrl || loginImage} alt="Profile" className="profile-image" />
+            <img 
+                src={
+                    user?.image 
+                        ? user.image.startsWith("data:image") 
+                            ? user.image 
+                            : `http://localhost:5001/uploads/${user.image}`
+                        : loginImage
+                } 
+                alt="Profile" 
+                className="profile-image" 
+            />
         </div>
+
+        <input 
+            type="file" 
+            accept="image/*" 
+            onChange={handleImageUpload} 
+            className="upload-input"
+        />
 
         <div className='form'>
           <div className='form-group'>

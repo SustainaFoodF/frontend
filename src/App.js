@@ -7,6 +7,8 @@ import DashboardHome from './pages/dashboardhome';
 import { useState } from 'react';
 import RefrshHandler from './RefrshHandler';
 import UserProfile from './pages/User/UserProfile';
+import LivreurProfile from './pages/User/LivreurProfile';
+import BusinessProfile from './pages/User/BusiniesProfile';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -26,6 +28,10 @@ function App() {
         <Route path="/DashboardHome" element={<PrivateRoute element={<DashboardHome />} />} />
         
         <Route path='/user/:activepage' element={<UserProfile/>} />
+        <Route path='/livreure' element={<LivreurProfile/>} />
+        <Route path='/bussniess' element={<BusinessProfile/>} />
+
+
       </Routes>
     </div>
   );

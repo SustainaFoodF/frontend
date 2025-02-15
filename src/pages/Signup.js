@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
 import './Signup.css';
-
-// Importation correcte de l'image
 import signupImage from '../pages/1.png';
 
 function Signup() {
@@ -12,7 +10,8 @@ function Signup() {
         name: '',
         email: '',
         password: '',
-        role: 'client' // Valeur par défaut
+        image: '',
+        role: 'client'
     });
 
     const navigate = useNavigate();
@@ -22,18 +21,32 @@ function Signup() {
         setSignupInfo({ ...signupInfo, [name]: value });
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setSignupInfo({ ...signupInfo, image: reader.result }); // Stocker l'image en Base64
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSignup = async (e) => {
         e.preventDefault();
-        const { name, email, password, role } = signupInfo;
+        const { name, email, password, role, image } = signupInfo;
+        
         if (!name || !email || !password || !role) {
             return handleError('All fields are required');
         }
+
         try {
             const response = await fetch('http://localhost:5001/auth/Signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(signupInfo)
+                body: JSON.stringify({ name, email, password, role, image }) // Envoi correct de l'image
             });
+
             const result = await response.json();
             if (result.success) {
                 handleSuccess(result.message);
@@ -48,71 +61,43 @@ function Signup() {
 
     return (
         <div className='signup-container'>
-            {/* Image de la page d'inscription */}
             <div className='signup-image'>
                 <img src={signupImage} alt='Signup Illustration' />
             </div>
 
-            {/* Formulaire d'inscription */}
             <div className='signup-form'>
                 <h1>Create Account</h1>
                 <p>Please enter personal information to continue</p>
                 <form onSubmit={handleSignup}>
-                    <div className='input-group'>
-                        <input 
-                            type='text' 
-                            name='name' 
-                            placeholder='Full Name' 
-                            onChange={handleChange} 
-                            value={signupInfo.name} 
-                        />
-                    </div>
-                    <input 
-                        type='email' 
-                        name='email' 
-                        placeholder='Email Address' 
-                        onChange={handleChange} 
-                        value={signupInfo.email} 
-                    />
-                    <input 
-                        type='password' 
-                        name='password' 
-                        placeholder='Password' 
-                        onChange={handleChange} 
-                        value={signupInfo.password} 
-                    />
+                    <input type='text' name='name' placeholder='Full Name' onChange={handleChange} value={signupInfo.name} />
+                    <input type='email' name='email' placeholder='Email Address' onChange={handleChange} value={signupInfo.email} />
+                    <input type='password' name='password' placeholder='Password' onChange={handleChange} value={signupInfo.password} />
+                    
+                    {/* Affichage de l'image sélectionnée */}
+                    {signupInfo.image && <img src={signupInfo.image} alt="Preview" className="preview-image" />}
 
-                    {/* Boutons radio pour choisir le rôle */}
-                    <div className="role-selection">
+                    {/* Champ pour télécharger une image */}
+                    <input type='file' accept='image/*' onChange={handleImageChange} />
+
+                    <div className='role-selection'>
                         <label>Select Role</label>
-                        <div className="role-options">
+                        <div className='role-options'>
                             <label className={`role-btn ${signupInfo.role === 'client' ? 'selected' : ''}`}>
-                                <input 
-                                    type="radio" 
-                                    name="role" 
-                                    value="client" 
-                                    checked={signupInfo.role === 'client'}
-                                    onChange={handleChange}
-                                />
+                                <input type='radio' name='role' value='client' checked={signupInfo.role === 'client'} onChange={handleChange} />
                                 Client
                             </label>
                             <label className={`role-btn ${signupInfo.role === 'business' ? 'selected' : ''}`}>
-                                <input 
-                                    type="radio" 
-                                    name="role" 
-                                    value="business" 
-                                    checked={signupInfo.role === 'business'}
-                                    onChange={handleChange}
-                                />
+                                <input type='radio' name='role' value='business' checked={signupInfo.role === 'business'} onChange={handleChange} />
                                 Business
+                            </label>
+                            <label className={`role-btn ${signupInfo.role === 'livreur' ? 'selected' : ''}`}>
+                                <input type='radio' name='role' value='livreur' checked={signupInfo.role === 'livreur'} onChange={handleChange} />
+                                Livreur
                             </label>
                         </div>
                     </div>
 
-                    {/* Bouton de soumission */}
                     <button type='submit' className='signup-button'>Create Account</button>
-
-                    {/* Lien vers la page de connexion */}
                     <p>Already have an account? <Link to='/login'>Login</Link></p>
                 </form>
                 <ToastContainer />

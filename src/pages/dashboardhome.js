@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { FaHome, FaCog, FaBars, FaTimes, FaEdit, FaTrash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";  // ✅ Ajout de useNavigate
+import { useNavigate } from "react-router-dom";
 import "./dashboardhome.css";
 
 const DashboardHome = () => {
-  const navigate = useNavigate(); // ✅ Définition de navigate
-
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(true);
   const [users, setUsers] = useState([]);
   const [editUser, setEditUser] = useState(null);
@@ -16,6 +15,19 @@ const DashboardHome = () => {
 
   useEffect(() => {
     fetchUsers();
+
+    // 🔒 Bloque l'accès si l'utilisateur n'est pas connecté
+    const email = localStorage.getItem("userEmail");
+    if (!email) {
+      navigate("/login");
+    }
+
+    // 🛑 Empêche de revenir à cette page après déconnexion
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = () => {
+      window.history.pushState(null, "", window.location.href);
+    };
+
   }, []);
 
   const fetchUsers = async () => {
@@ -29,7 +41,16 @@ const DashboardHome = () => {
 
   const handleLogout = () => {
     localStorage.clear(); // 🔥 Supprime tout du localStorage
-    navigate('/login'); // 🔄 Redirige vers la page login
+    sessionStorage.clear(); // 🔥 Vide aussi sessionStorage
+    caches.keys().then((names) => {
+      names.forEach((name) => caches.delete(name)); // 🔥 Vide le cache du navigateur
+    });
+
+    // ⏳ Petit délai pour garantir la suppression des données
+    setTimeout(() => {
+      navigate("/login", { replace: true }); // 🔄 Redirection forcée
+      window.location.reload(); // 🔄 Recharge la page pour vider complètement la session
+    }, 500);
   };
 
   const handleEdit = (user) => {

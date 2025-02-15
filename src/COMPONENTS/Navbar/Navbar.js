@@ -26,10 +26,18 @@ const Navbar = ({ reloadnavbar }) => {
     }, [reloadnavbar]);
 
     const handleLogout = () => {
-        localStorage.clear(); // 🔥 Supprime tout du localStorage
-        navigate('/login'); // 🔄 Redirige vers la page login
+        localStorage.clear(); // 🔥 Supprime les données du localStorage
+    
+        // 🔹 Remplace l'historique et empêche le retour arrière
+        navigate('/login', { replace: true });
+    
+        // 🔹 Empêche l'utilisateur d'utiliser le bouton "Retour"
+        window.history.pushState(null, null, "/login");
+        window.addEventListener("popstate", () => {
+            window.history.pushState(null, null, "/login");
+        });
     };
-
+    
     return (
         <nav>
             <div className='s1'>

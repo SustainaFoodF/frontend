@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import './Navbar.css'
-import logo from '../../ASSETS/logo.png'
-import Dropdown from 'react-bootstrap/Dropdown'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import './Navbar.css';
+import logo from '../../ASSETS/logo.png';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = ({ reloadnavbar }) => {
     const [cartquantity, setcartquantity] = useState(0);
-    const navigate = useNavigate(); // 🔹 Hook pour la redirection
+    const navigate = useNavigate();
 
     const getcarttotalitems = () => {
         let cart = JSON.parse(localStorage.getItem('cart'));
         if (cart) {
-            let total = 0;
-            cart.forEach(item => {
-                total += item.quantity;
-            });
+            let total = cart.reduce((sum, item) => sum + item.quantity, 0);
             setcartquantity(total);
         } else {
             setcartquantity(0);
@@ -26,18 +23,12 @@ const Navbar = ({ reloadnavbar }) => {
     }, [reloadnavbar]);
 
     const handleLogout = () => {
-        localStorage.clear(); // 🔥 Supprime les données du localStorage
-    
-        // 🔹 Remplace l'historique et empêche le retour arrière
+        localStorage.clear();
         navigate('/login', { replace: true });
-    
-        // 🔹 Empêche l'utilisateur d'utiliser le bouton "Retour"
-        window.history.pushState(null, null, "/login");
-        window.addEventListener("popstate", () => {
-            window.history.pushState(null, null, "/login");
-        });
     };
-    
+
+    const [shows3, setshows3] = useState(false);
+
     return (
         <nav>
             <div className='s1'>
@@ -70,12 +61,45 @@ const Navbar = ({ reloadnavbar }) => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item href="/login">Login</Dropdown.Item>
-                            <Dropdown.Item href="/signup">Signup</Dropdown.Item>
-                            <Dropdown.Item href="/user/accountsettings">Profile</Dropdown.Item>
+                            <Dropdown.Item as={Link} to="/login">Login</Dropdown.Item>
+                            <Dropdown.Item as={Link} to="/signup">Signup</Dropdown.Item>
+                            <Dropdown.Item as={Link} to="/user/accountsettings">Profile</Dropdown.Item>
                             <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
+                </div>
+            </div>
+
+            <div className='s2'>
+                <Link to='/'>Home</Link>
+                <Dropdown>
+                    <Dropdown.Toggle variant="" id="dropdown-basic">Categories</Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item as={Link} to="/categories/vegetables">Fresh Vegetables</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/categories/fruits">Fresh Fruits</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/categories/cleaning">House Cleaning</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                <Link to='/about'>About Us</Link>
+                <Link to='/contact'>Contact Us</Link>
+                <Dropdown>
+                    <Dropdown.Toggle variant="" id="dropdown-basic">More</Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item as={Link} to="/FAQ">FAQ</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/privacypolicy">Privacy Policy</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/termsandconditions">Terms & Conditions</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+
+            <div className='s3'>
+                <div className='s31'>
+                    <img src={logo} alt='logo' className='logo' />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"
+                        onClick={() => setshows3(!shows3)}
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
                 </div>
             </div>
         </nav>

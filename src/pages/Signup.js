@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
 import './Signup.css';
 import signupImage from '../pages/1.png';
+import Navbar from '../COMPONENTS/Navbar/Navbar';
 
 function Signup() {
     const [signupInfo, setSignupInfo] = useState({
@@ -60,6 +61,9 @@ function Signup() {
     };
 
     return (
+        <>
+        <Navbar reloadnavbar={false} />  
+
         <div className='signup-container'>
             <div className='signup-image'>
                 <img src={signupImage} alt='Signup Illustration' />
@@ -77,7 +81,8 @@ function Signup() {
                     {signupInfo.image && <img src={signupInfo.image} alt="Preview" className="preview-image" />}
 
                     {/* Champ pour télécharger une image */}
-                    <input type='file' accept='image/*' onChange={handleImageChange} />
+                    <input type='file' accept='image/*' onChange={handleImageChange}         className="preview-image" 
+                    />
 
                     <div className='role-selection'>
                         <label>Select Role</label>
@@ -101,8 +106,9 @@ function Signup() {
                     <p>Already have an account? <Link to='/login'>Login</Link></p>
                 </form>
                 <ToastContainer />
-            </div>
+                </div>
         </div>
+    </>
     );
 }
 

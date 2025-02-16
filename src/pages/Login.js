@@ -6,6 +6,7 @@ import './Login.css';
 
 // Importation correcte de l'image
 import loginImage from '../pages/1.png';
+import Navbar from '../COMPONENTS/Navbar/Navbar';
 
 function Login() {
     const [loginInfo, setLoginInfo] = useState({
@@ -74,42 +75,46 @@ function Login() {
     };
 
     return (
-        <div className='login-container'>
-            {/* Image de la page de connexion */}
-            <div className='login-image'>
-                <img src={loginImage} alt='Login Illustration' />
+        <>
+            <Navbar reloadnavbar={false} /> 
+            <div className='login-container'>
+                {/* Image de la page de connexion */}
+                <div className='login-image'>
+                    <img src={loginImage} alt='Login Illustration' />
+                </div>
+    
+                {/* Formulaire de connexion */}
+                <div className='login-form'>
+                    <h1>Welcome Back</h1>
+                    <p>Please enter your credentials to continue</p>
+                    <form onSubmit={handleLogin}>
+                        <input 
+                            type='email' 
+                            name='email' 
+                            placeholder='Email Address' 
+                            onChange={handleChange} 
+                            value={loginInfo.email} 
+                        />
+                        <input 
+                            type='password' 
+                            name='password' 
+                            placeholder='Password' 
+                            onChange={handleChange} 
+                            value={loginInfo.password} 
+                        />
+    
+                        {/* Bouton de soumission */}
+                        <button type='submit' className='login-button'>Login</button>
+    
+                        {/* Lien vers la page d'inscription */}
+                        <p>Don't have an account? <Link to='/signup'>Sign up</Link></p>
+                    </form>
+                    <ToastContainer />
+                </div>
             </div>
-
-            {/* Formulaire de connexion */}
-            <div className='login-form'>
-                <h1>Welcome Back</h1>
-                <p>Please enter your credentials to continue</p>
-                <form onSubmit={handleLogin}>
-                    <input 
-                        type='email' 
-                        name='email' 
-                        placeholder='Email Address' 
-                        onChange={handleChange} 
-                        value={loginInfo.email} 
-                    />
-                    <input 
-                        type='password' 
-                        name='password' 
-                        placeholder='Password' 
-                        onChange={handleChange} 
-                        value={loginInfo.password} 
-                    />
-
-                    {/* Bouton de soumission */}
-                    <button type='submit' className='login-button'>Login</button>
-
-                    {/* Lien vers la page d'inscription */}
-                    <p>Don't have an account? <Link to='/signup'>Sign up</Link></p>
-                </form>
-                <ToastContainer />
-            </div>
-        </div>
+        </>
     );
+    
 }
 
 export default Login;

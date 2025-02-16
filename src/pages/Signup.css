@@ -92,9 +92,26 @@
     text-decoration: underline;
 }
 .signup-image img {
-    height: auto;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signup-image img {
+    width: 100%;
+    max-width: 400px;
+  }
+  .preview-image {
+    width: 100px;  /* Taille réduite */
+    height: 100px; 
+    border-radius: 50%; /* Rend l'image ronde */
+    object-fit: cover; /* Garde le bon ratio */
     display: block;
+    margin: 10px auto; /* Centrer l’image */
+    border: 2px solid #ddd; /* Optionnel : Ajouter une bordure légère */
 }
+
 /* Style de la section rôle */
 .role-selection {
     margin-top: 15px;

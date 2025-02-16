@@ -21,6 +21,32 @@ nav .s1 {
     justify-content: space-between;
     align-items: center;
 }
+/* Assurez-vous que le dropdown ne reste pas bloqué en display: block */
+.dropdown-menu {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: block; /* Affiché lorsqu'il est actif */
+}
+
+/* Supprime toute propriété CSS qui empêcherait le menu de se fermer */
+.dropdown-item {
+    cursor: pointer;
+    padding: 10px;
+    transition: background 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
 
 nav img {
     width: 150px;

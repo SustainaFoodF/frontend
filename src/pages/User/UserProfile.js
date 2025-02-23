@@ -78,7 +78,7 @@ const UserProfile = () => {
                 <div className='right'>
                     {activepage === 'accountsettings' && <AccountSettings />}
                     {activepage === 'changepassword' && <ChangePassword />}
-                    {activepage === 'address' && <UserAddress />}
+                    {activepage === 'address' && <UserAddress userId={user._id}/>}
                     {activepage === 'legalnotice' && <LegalNotice />}
                 </div>
             </div>

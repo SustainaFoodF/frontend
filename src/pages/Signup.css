@@ -1,0 +1,163 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.signup-container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+
+
+.signup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.signup-form {
+    flex: 1;
+    max-width: 450px;
+    background: #fff;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.signup-form p {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.input-group input,
+.signup-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.terms {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.signup-button {
+    width: 100%;
+    background-color: #ff5f5f;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.signup-button:hover {
+    background-color: #e04e4e;
+}
+
+.signup-form p a {
+    color: #ff5f5f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-form p a:hover {
+    text-decoration: underline;
+}
+.signup-image img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signup-image img {
+    width: 100%;
+    max-width: 400px;
+  }
+  .preview-image {
+    width: 100px;  /* Taille réduite */
+    height: 100px; 
+    border-radius: 50%; /* Rend l'image ronde */
+    object-fit: cover; /* Garde le bon ratio */
+    display: block;
+    margin: 10px auto; /* Centrer l’image */
+    border: 2px solid #ddd; /* Optionnel : Ajouter une bordure légère */
+}
+
+/* Style de la section rôle */
+.role-selection {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.role-selection label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Conteneur des boutons */
+.role-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Style des boutons radio */
+.role-btn {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    background-color: white;
+    text-align: center;
+}
+
+/* Bouton sélectionné */
+.role-btn.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Cacher le vrai input radio */
+.role-btn input {
+    display: none;
+}
+
+/* Effet au survol */
+.role-btn:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}

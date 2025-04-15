@@ -1,0 +1,144 @@
+/* Style général */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .livraison-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Statistiques du livreur */
+  .livreur-stats {
+    margin-bottom: 30px;
+  }
+  
+  .livreur-stats h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .stat-item {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  /* Filtres */
+  .filters {
+    margin-bottom: 30px;
+  }
+  
+  .filters h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .filter-group {
+    margin-bottom: 15px;
+  }
+  
+  .filter-group label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .filter-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    font-size: 14px;
+  }
+  
+  /* Tableau des livraisons */
+  .livraison-table {
+    margin-bottom: 30px;
+  }
+  
+  .livraison-table h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  table th {
+    background-color: #2c3e50;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  table td {
+    background-color: #fff;
+  }
+  
+  .status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-badge.in_progress {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .status-badge.completed {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+  
+  .update-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .update-button:hover {
+    background-color: #218838;
+  }

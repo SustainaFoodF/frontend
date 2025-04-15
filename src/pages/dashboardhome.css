@@ -1,0 +1,335 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background: #ff4757;;
+    color: white;
+    padding: 20px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    min-height: 100vh; /* Fixe le sidebar sur toute la hauteur */
+    position: fixed; /* Reste fixe sur desktop */
+    left: 0;
+    top: 0;
+  }
+  
+  .sidebar.closed {
+    width: 80px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .sidebar ul li:hover {
+    background: #ff4757;
+  }
+  
+  .toggle-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenu principal */
+  .dashboard-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 250px; /* Décalage pour éviter que le contenu passe sous le sidebar */
+    transition: margin-left 0.3s ease;
+  }
+  
+  .sidebar.closed + .dashboard-content {
+    margin-left: 80px;
+  }
+  
+  /* Tableau des clients */
+  .table-container {
+    margin-top: 20px;
+    background: white;
+    width: 1217px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    max-width: 1200px; /* Largeur max du tableau */
+    margin: 20px auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background:  #ff4757;
+    color: white;
+  }
+  
+  td img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .sidebar {
+      width: 80px;
+    }
+  
+    .sidebar.closed {
+      width: 60px;
+    }
+  
+    .sidebar ul li span {
+      display: none;
+    }
+  
+    .dashboard-content {
+      margin-left: 80px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+      min-height: auto;
+    }
+  
+    .sidebar ul {
+      display: flex;
+      gap: 20px;
+    }
+  
+    .dashboard-content {
+      margin-left: 0;
+    }
+    
+  }
+  /* Action Buttons */
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 5px;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  
+  .edit-btn {
+    color: #3498db;
+  }
+  
+  .delete-btn {
+    color: #e74c3c;
+  }
+  
+  .edit-btn:hover {
+    background: #ecf0f1;
+  }
+  
+  .delete-btn:hover {
+    background: #fdecea;
+  }
+  /* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Container */
+  .modal {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Modal Title */
+  .modal h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Input Fields */
+  .modal input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s;
+  }
+  
+  .modal input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.2);
+  }
+  
+  /* Buttons Container */
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  /* Buttons */
+  .modal-actions button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .modal-actions button:first-child {
+    background: #007bff;
+    color: white;
+  }
+  
+  .modal-actions button:first-child:hover {
+    background: #0056b3;
+  }
+  
+  .modal-actions button:last-child {
+    background: #d33;
+    color: white;
+  }
+  
+  .modal-actions button:last-child:hover {
+    background: #a30e0e;
+  }
+  
+  /* Close Button */
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #777;
+    transition: color 0.3s;
+  }
+  
+  .close-modal:hover {
+    color: #333;
+  }
+  
+  .dashboard-container {
+    padding: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+ 
+  .edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 5px;
+  }
+  
+  .edit-btn {
+    color: blue;
+  }
+  
+  .delete-btn {
+    color: red;
+  }
+  
+  /* Modal Styling */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+  }
+  

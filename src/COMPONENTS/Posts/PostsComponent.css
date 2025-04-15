@@ -1,0 +1,184 @@
+/* CSS for the Add Post Button */
+.posts-container{
+    display: flex;
+    width: 100;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+    
+}
+.btns{
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    align-items: flex-start; /* Align items to the top */
+    position: relative; /* Ensure positioning context */
+     width: 100%;
+ }
+.add-post-btn {
+    width: 20%;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-post-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Modal styles */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 100%;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-header h5 {
+    margin: 0;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: red;
+  }
+  
+  /* Form styles */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .submit-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #218838;
+  }
+  .posts-list {
+    margin-top: 20px;
+  }
+  /* General form styling */
+.post-form {
+    margin: 0 auto;
+   padding: 20px;
+   background-color: #f9f9f9;
+   border-radius: 8px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+ }
+ 
+ /* Title and content labels */
+ .post-form h3 {
+   text-align: center;
+   margin-bottom: 20px;
+   color: #333;
+ }
+ 
+ .form-group {
+   margin-bottom: 15px;
+ }
+ 
+ /* Labels */
+ .form-group label {
+   display: block;
+   font-weight: bold;
+   color: #333;
+   margin-bottom: 5px;
+ }
+ 
+ /* Input fields */
+ .form-group input,
+ .form-group textarea {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   font-size: 16px;
+   color: #333;
+   background-color: #fff;
+   transition: border-color 0.3s ease;
+ }
+ 
+ .form-group input:focus,
+ .form-group textarea:focus {
+   border-color: #007bff;
+   outline: none;
+ }
+ 
+ /* Submit button */
+ .button-posts {
+   width: 100%;
+   padding: 12px;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   font-size: 16px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+ }
+ 
+ /* Button hover effect */
+ .button-posts:hover {
+   background-color: #0056b3;
+ }
+ 
+ /* Disabled button */
+ .button-posts:disabled {
+   background-color: #c6c6c6;
+   cursor: not-allowed;
+ }
+ 
+ /* Error message styling */
+ .error {
+   color: #ff4d4d;
+   font-size: 14px;
+   margin-bottom: 15px;
+ }
+ 

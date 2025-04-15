@@ -37,7 +37,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <div className="logo">SustainaFood</div>
+      <div className="logo"> </div>
       <nav className="sidebar-menu">
         <Link to="/livreur/tasks" className={`menu-item ${location.pathname === '/livreur/tasks' ? 'active' : ''}`}>
           Tasks

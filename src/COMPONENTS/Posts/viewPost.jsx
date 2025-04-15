@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addReview, deleteReview } from "../../services/postService";
 import Comments from "./comments";
 import { createComment } from "../../services/commentService";
@@ -14,6 +14,9 @@ export default function ViewPost({
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [openComment, setOpenComment] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [commentFilter, setCommentFilter] = useState("newest");
+  const [filteredComments, setFilteredComments] = useState([]);
 
   const loggedInUserId = localStorage.getItem("loggedInUserId");
 
@@ -23,6 +26,44 @@ export default function ViewPost({
   const isUserDislikedPost = post.reviews
     ? post?.reviews?.dislikes.find((e) => e === loggedInUserId) != null
     : false;
+
+  // Filter and sort comments based on search term and filter selection
+  useEffect(() => {
+    if (!post?.comments) {
+      setFilteredComments([]);
+      return;
+    }
+
+    let filtered = [...post.comments];
+    
+    // Apply search filter if there's a search term
+    if (searchTerm.trim()) {
+      filtered = filtered.filter(comment => 
+        comment.value.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (comment.creator?.name && comment.creator.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+    }
+    
+    // Apply sorting
+    switch (commentFilter) {
+      case "newest":
+        filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        break;
+      case "oldest":
+        filtered.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        break;
+      case "popularity":
+        // Assuming comments might have likes or similar metrics
+        // If not, this would behave similar to newest
+        filtered.sort((a, b) => (b.likes?.length || 0) - (a.likes?.length || 0));
+        break;
+      default:
+        filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+    
+    setFilteredComments(filtered);
+  }, [post?.comments, searchTerm, commentFilter]);
+
   const handleAddReview = async (type) => {
     const isLoggedUser =
       localStorage.getItem("token") !== undefined &&
@@ -34,12 +75,14 @@ export default function ViewPost({
       setIsLoading(false);
     }
   };
+
   const handleDeleteReview = async (type) => {
     setIsLoading(true);
     await deleteReview(post._id, type);
     notifyParent();
     setIsLoading(false);
   };
+
   const handleSubmitComment = async (value) => {
     await createComment({
       postId: post._id,
@@ -47,11 +90,18 @@ export default function ViewPost({
     });
     notifyParent();
   };
+
+  // Format date for better readability
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <div className="post-container">
       <div className="post-header">
         <p className="post-creator">Created by: {post.creator?.name}</p>{" "}
-        <p className="post-time">Posted on {postDate}</p>
+        <p className="post-time">Posted on {formatDate(postDate)}</p>
         {isOwner && (
           <div className="post-actions">
             <button className="update-btn" onClick={() => setMode("edit")}>
@@ -65,8 +115,6 @@ export default function ViewPost({
       </div>
       <div className="post-header">
         <h3 className="post-title">{post.title}</h3>
-
-        {/* Displaying creator name */}
       </div>
       <div className="post-body">
         <p className="post-text">{post.text}</p>
@@ -89,16 +137,16 @@ export default function ViewPost({
               onClick={() => handleAddReview("like")}
               disabled={isLoading}
             >
-              <i class="fa-solid fa-thumbs-up"></i>{" "}
+              <i className="fa-solid fa-thumbs-up"></i>{" "}
               {post?.reviews?.likes?.length}
             </button>
             <button className="like-btn">
               <i
-                class="fa-solid fa-thumbs-down"
+                className="fa-solid fa-thumbs-down"
                 onClick={() => handleAddReview("dislike")}
                 disabled={isLoading}
               ></i>{" "}
-              {post?.reviews.dislikes.length}
+              {post?.reviews?.dislikes?.length}
             </button>
           </>
         ) : (
@@ -110,7 +158,7 @@ export default function ViewPost({
                   onClick={() => handleAddReview("like")}
                   disabled={isLoading}
                 >
-                  <i class="fa-solid fa-thumbs-up"></i>{" "}
+                  <i className="fa-solid fa-thumbs-up"></i>{" "}
                   {post?.reviews?.likes?.length}
                 </button>
                 <button
@@ -118,8 +166,8 @@ export default function ViewPost({
                   disabled={isLoading}
                   onClick={() => handleDeleteReview("dislike")}
                 >
-                  <i class="fa-solid fa-thumbs-down"></i>{" "}
-                  {post?.reviews.dislikes.length}
+                  <i className="fa-solid fa-thumbs-down"></i>{" "}
+                  {post?.reviews?.dislikes?.length}
                 </button>
               </>
             ) : (
@@ -129,7 +177,7 @@ export default function ViewPost({
                   disabled={isLoading}
                   onClick={() => handleDeleteReview("like")}
                 >
-                  <i class="fa-solid fa-thumbs-up"></i>{" "}
+                  <i className="fa-solid fa-thumbs-up"></i>{" "}
                   {post?.reviews?.likes?.length}
                 </button>
                 <button
@@ -137,8 +185,8 @@ export default function ViewPost({
                   onClick={() => handleAddReview("dislike")}
                   disabled={isLoading}
                 >
-                  <i class="fa-solid fa-thumbs-down"></i>{" "}
-                  {post?.reviews.dislikes.length}
+                  <i className="fa-solid fa-thumbs-down"></i>{" "}
+                  {post?.reviews?.dislikes?.length}
                 </button>
               </>
             )}
@@ -149,19 +197,46 @@ export default function ViewPost({
           className="comment-btn"
           onClick={() => setOpenComment(!openComment)}
         >
-          <i class="fa-solid fa-comment"></i> {post?.comments?.length || 0}
+          <i className="fa-solid fa-comment"></i> {post?.comments?.length || 0}
         </button>
       </div>
       {openComment && (
-        <Comments
-          data={
-            post?.comments
-              ?.slice()
-              ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) || // Sort by latest first
-            []
-          }
-          onCommentSubmit={handleSubmitComment}
-        />
+        <>
+          <div className="comment-controls">
+            <div className="search-container">
+              <input
+                type="text"
+                className="comment-search"
+                placeholder="Search in comments..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <i className="fa-solid fa-search search-icon"></i>
+            </div>
+            <div className="filter-container">
+              <label htmlFor="comment-filter">Sort by: </label>
+              <select
+                id="comment-filter"
+                className="comment-filter"
+                value={commentFilter}
+                onChange={(e) => setCommentFilter(e.target.value)}
+              >
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="popularity">Most Popular</option>
+              </select>
+            </div>
+          </div>
+          {searchTerm && (
+            <div className="search-results">
+              Found {filteredComments.length} comment(s) matching "{searchTerm}"
+            </div>
+          )}
+          <Comments
+            data={filteredComments}
+            onCommentSubmit={handleSubmitComment}
+          />
+        </>
       )}
     </div>
   );

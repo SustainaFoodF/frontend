@@ -24,7 +24,7 @@ const IssueReportingModal = ({ taskId, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // In a real app, make API call to submit issue
-    // Example: axios.post('/api/tasks/issue', { taskId, issueType, details, photo })
+    // Example: axios.post('/tasks/issue', { taskId, issueType, details, photo })
     console.log({
       taskId,
       issueType,

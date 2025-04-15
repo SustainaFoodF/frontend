@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import TaskCard from './TaskCard';
 import '../styles.css';
+import Navbar from '../../Navbar/Navbar';
 
 const TaskDashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -59,7 +60,11 @@ const TaskDashboard = () => {
   }
 
   return (
+    <div> 
+      <Navbar reloadnavbar={false} />
+
     <div className="layout">
+      
       <Sidebar />
       <main className="main-content">
         <div className="dashboard-header">
@@ -89,6 +94,7 @@ const TaskDashboard = () => {
           )}
         </div>
       </main>
+    </div>
     </div>
   );
 };

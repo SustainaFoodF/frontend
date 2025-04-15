@@ -1,184 +1,208 @@
-/* CSS for the Add Post Button */
-.posts-container{
-    display: flex;
-    width: 100;
-    flex-direction: column;
-    padding: 20px;
-    justify-content: center;
-    
+/* PostsComponent.css - Enhanced with styling for search and filters */
+
+.posts-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
 }
-.btns{
-    display: flex;
-    justify-content: flex-end; /* Align items to the right */
-    align-items: flex-start; /* Align items to the top */
-    position: relative; /* Ensure positioning context */
-     width: 100%;
- }
-.add-post-btn {
-    width: 20%;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.btns {
+  display: flex;
+  gap: 10px;
+}
+
+.add-post-btn, .filter-toggle-btn {
+  padding: 8px 15px;
+  border-radius: 4px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s;
+}
+
+.add-post-btn:hover, .filter-toggle-btn:hover {
+  background-color: #2980b9;
+}
+
+.filter-toggle-btn i.active {
+  transform: rotate(180deg);
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.search-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #7f8c8d;
+}
+
+.search-btn:hover {
+  color: #3498db;
+}
+
+.filters-container {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 150px;
+}
+
+.filter-group label {
+  font-size: 12px;
+  color: #7f8c8d;
+  font-weight: bold;
+}
+
+.filter-select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: white;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  border-color: #3498db;
+}
+
+.reset-filters-btn {
+  padding: 8px 15px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: auto;
+  align-self: flex-end;
+  transition: background-color 0.2s;
+}
+
+.reset-filters-btn:hover {
+  background-color: #c0392b;
+}
+
+.results-info {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 20px;
+  color: #7f8c8d;
+}
+
+.no-posts-message {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  color: #7f8c8d;
+}
+
+.no-posts-message i {
+  font-size: 48px;
+  margin-bottom: 15px;
+  color: #bdc3c7;
+}
+
+.error-message {
+  padding: 15px;
+  background-color: #fadbd8;
+  color: #c0392b;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .posts-header {
+    flex-direction: column;
+    align-items: stretch;
   }
   
-  .add-post-btn:hover {
-    background-color: #0056b3;
+  .search-bar {
+    max-width: none;
   }
   
-  /* Modal styles */
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+  .filters-container {
+    flex-direction: column;
+    align-items: stretch;
   }
   
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    max-width: 100%;
+  .filter-group {
+    min-width: auto;
   }
   
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .modal-header h5 {
-    margin: 0;
-  }
-  
-  .close-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .close-btn:hover {
-    color: red;
-  }
-  
-  /* Form styles */
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-control {
+  .reset-filters-btn {
+    align-self: center;
+    margin-left: 0;
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
   }
-  
-  .submit-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .submit-btn:hover {
-    background-color: #218838;
-  }
-  .posts-list {
-    margin-top: 20px;
-  }
-  /* General form styling */
-.post-form {
-    margin: 0 auto;
-   padding: 20px;
-   background-color: #f9f9f9;
-   border-radius: 8px;
-   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
- }
- 
- /* Title and content labels */
- .post-form h3 {
-   text-align: center;
-   margin-bottom: 20px;
-   color: #333;
- }
- 
- .form-group {
-   margin-bottom: 15px;
- }
- 
- /* Labels */
- .form-group label {
-   display: block;
-   font-weight: bold;
-   color: #333;
-   margin-bottom: 5px;
- }
- 
- /* Input fields */
- .form-group input,
- .form-group textarea {
-   width: 100%;
-   padding: 10px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
-   font-size: 16px;
-   color: #333;
-   background-color: #fff;
-   transition: border-color 0.3s ease;
- }
- 
- .form-group input:focus,
- .form-group textarea:focus {
-   border-color: #007bff;
-   outline: none;
- }
- 
- /* Submit button */
- .button-posts {
-   width: 100%;
-   padding: 12px;
-   background-color: #007bff;
-   color: white;
-   border: none;
-   border-radius: 5px;
-   font-size: 16px;
-   cursor: pointer;
-   transition: background-color 0.3s ease;
- }
- 
- /* Button hover effect */
- .button-posts:hover {
-   background-color: #0056b3;
- }
- 
- /* Disabled button */
- .button-posts:disabled {
-   background-color: #c6c6c6;
-   cursor: not-allowed;
- }
- 
- /* Error message styling */
- .error {
-   color: #ff4d4d;
-   font-size: 14px;
-   margin-bottom: 15px;
- }
- 
+}

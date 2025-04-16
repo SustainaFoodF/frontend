@@ -7,7 +7,7 @@ import { PostForm } from "./form";
 export default function PostComponent({ post, notifyParent }) {
   const loggedInUserId = localStorage.getItem("loggedInUserId");
   const isOwner = post.creator._id === loggedInUserId;
-  const postDate = new Date(post.createdAt).toLocaleString(); // Formatting the createdAt date
+  const postDate = new Date(post.createdAt) // Formatting the createdAt date
   const getFileUrl = (fileName) => `http://localhost:5001/uploads/${fileName}`;
   const renderFilePreview = (fileName) => {
     const fileExt = fileName.split(".").pop().toLowerCase();

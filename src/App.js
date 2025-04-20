@@ -17,6 +17,10 @@ import Cart from "./COMPONENTS/Cart/Cart";
 import Livreurhome from "./pages/livreurhome";
 import "../src/COMPONENTS/Livreur/styles.css";
 import LivreurProfile from "./pages/User/LivreurProfile";
+import About from "./pages/About";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -40,7 +44,11 @@ function App() {
             element={<PrivateRoute element={<DashboardHome />} />}
           />
           <Route path="/client/:activepage" element={<UserProfile />} />
-
+          
+          <Route path="/about" element={<About />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/termsandconditions" element={<TermsAndConditions />} />
+          <Route path="/contact" element={<ContactUs />} />
 
 
           <Route path="/livreur/*" element={<PrivateRoute element={<Livreurhome />} />} />

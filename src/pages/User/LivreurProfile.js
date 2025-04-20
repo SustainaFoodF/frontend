@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Footer1 from "../../COMPONENTS/Footer/Footer1";
 import Footer2 from "../../COMPONENTS/Footer/Footer2";
-import Navbar from "../../COMPONENTS/Navbar/Navbar";
 import SingleBanner from "../../COMPONENTS/Banners/SingleBanner";
 import AccountSettings from "../../COMPONENTS/UserProfile/AccountSettings";
 import ChangePassword from "../../COMPONENTS/UserProfile/ChangePassword";
@@ -11,6 +10,7 @@ import "./LivreurProfile.css";
 import loginImage from "../../pages/user-profile-icon-symbol-template-free-vector.jpg";
 import { FaCommentDots } from "react-icons/fa";
 import LivreurSidebar from "../../COMPONENTS/UserProfile/LivreurSidebar";
+import LivreurNavbar from "../../COMPONENTS/Navbar/LivreurNavBar";
 
 
 const LivreurProfile = () => {
@@ -60,7 +60,7 @@ const LivreurProfile = () => {
 
   return (
     <div className="livreurprofile">
-      <Navbar />
+      <LivreurNavbar />
       <SingleBanner
         heading="Profil du Livreur"
         bannerimage="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=774&q=80"

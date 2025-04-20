@@ -97,7 +97,7 @@ const TaskDetail = () => {
   return (
     <main className="main-content">
       <div className="breadcrumb">
-        <span onClick={() => navigate('/livreur/tasks')}>Tasks</span> > 
+        <span onClick={() => navigate('/livreur/tasks')}>Tasks</span>  
         <span> Task #{task._id?.slice(-6) || id}</span>
       </div>
 

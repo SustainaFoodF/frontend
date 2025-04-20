@@ -14,7 +14,7 @@ const Livreurhome = () => {
 
   return (
     <div className="livreur-home-container">
-      <LivreurNavbar  />
+      <LivreurNavbar reloadnavbar={false} />
       
       <div className="livreur-content-wrapper">
         <Sidebar />

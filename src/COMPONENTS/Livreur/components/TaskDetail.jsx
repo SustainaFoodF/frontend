@@ -14,6 +14,7 @@ const TaskDetail = () => {
   const [error, setError] = useState(null);
   const [showReportModal, setShowReportModal] = useState(false);
   const [activeTab, setActiveTab] = useState('details');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     const fetchTaskDetails = async () => {

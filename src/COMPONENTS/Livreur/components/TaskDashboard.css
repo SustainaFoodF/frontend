@@ -1,0 +1,59 @@
+/* TaskDashboard specific styles */
+.layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    margin-left: 20%;
+    width: 80%;
+    padding: 24px;
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .filter-dropdown {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    background-color: white;
+    color: #1f2937;
+    font-size: 16px;
+  }
+  
+  .filter-dropdown option {
+    padding: 8px;
+  }
+  
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 18px;
+    color: #6b7280;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .layout {
+      flex-direction: column;
+    }
+    
+    .main-content {
+      margin-left: 0;
+      width: 100%;
+      padding: 16px;
+    }
+  }

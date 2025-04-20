@@ -1,0 +1,186 @@
+/* TaskDetail specific styles */
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .tabs {
+    display: flex;
+    margin: 20px 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #6b7280;
+    position: relative;
+  }
+  
+  .tab-button.active {
+    color: #34c759;
+    font-weight: bold;
+  }
+  
+  .tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #34c759;
+  }
+  
+  .location-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  .location-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .location-icon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .location-icon.pickup {
+    color: #3b82f6;
+  }
+  
+  .location-icon.dropoff {
+    color: #10b981;
+  }
+  
+  .info-icon {
+    margin-right: 8px;
+    color: #6b7280;
+  }
+  
+  .map-container {
+    margin: 24px 0;
+  }
+  
+  .map-placeholder {
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: #e5e7eb;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+  }
+  
+  .map-text {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  .item-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  
+  .action-button {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .accept-button,
+  .deliver-button {
+    background-color: #34c759;
+    color: white;
+  }
+  
+  .pickup-button {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .report-button {
+    background-color: white;
+    color: #ef4444;
+    border: 1px solid #ef4444;
+  }
+  
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+  }
+  
+  .spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #34c759;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .map-placeholder {
+      width: 100%;
+      height: 300px;
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .action-button {
+      width: 100%;
+    }
+  }

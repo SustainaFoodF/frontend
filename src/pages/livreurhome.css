@@ -1,0 +1,32 @@
+/* livreurhome.css */
+
+.livreur-home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  position: relative; /* Or fixed, just make sure it's handled */
+  z-index: 10;
+}
+
+.livreur-content-wrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 60px; /* Adjust to match the height of your navbar */
+}
+
+.sidebar {
+  width: 250px;
+}
+
+.livreur-main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.footer {
+  margin-top: auto;
+}

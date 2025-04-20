@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-
 import ForgotPassword from "./COMPONENTS/Forgetpassword/Forgotpassword";
 import ResetPassword from "./COMPONENTS/Resetpassword/Resetpassword";
 import Signup from "./pages/Signup";
@@ -8,23 +7,16 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import DashboardHome from "./pages/dashboardhome";
 import { useState } from "react";
-
 import RefrshHandler from "./RefrshHandler";
 import UserProfile from "./pages/User/UserProfile";
-import LivreurProfile from "./pages/User/LivreurProfile";
 import BusinessProfile from "./pages/User/BusiniesProfile";
 import Activation from "./COMPONENTS/Activation/VerificationComponent";
-
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import HomeCategories from "./COMPONENTS/Category/HomeCategories";
 import ClientCategory from "./COMPONENTS/Categories";
 import Cart from "./COMPONENTS/Cart/Cart";
-
-
-import Livreur from "../src/COMPONENTS/Livreur/livreur";
-
-// Import the styles
+import Livreurhome from "./pages/livreurhome";
 import "../src/COMPONENTS/Livreur/styles.css";
+import LivreurProfile from "./pages/User/LivreurProfile";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -48,10 +40,15 @@ function App() {
             element={<PrivateRoute element={<DashboardHome />} />}
           />
           <Route path="/client/:activepage" element={<UserProfile />} />
-          
-          <Route path="/livreur/*" element={<PrivateRoute element={<Livreur />} />} />
-          
-                    
+
+
+
+          <Route path="/livreur/*" element={<PrivateRoute element={<Livreurhome />} />} />
+          <Route path="/livreur/:activepage" element={<PrivateRoute element={<LivreurProfile />} />} />
+
+
+
+
           <Route path="/business/:activepage" element={<BusinessProfile />} />
           <Route path="/categories/:categoryId" element={<ClientCategory />} />
           <Route path="/cart" element={<Cart />} />

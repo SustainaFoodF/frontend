@@ -8,20 +8,23 @@ import { getAllCategories } from "../../services/categoryService";
 const Navbar = ({ reloadnavbar }) => {
   const [cartquantity, setcartquantity] = useState(0);
   const navigate = useNavigate();
-  const isLoggedUser =
+  const isLoggedUser = 
     localStorage.getItem("token") !== undefined &&
     localStorage.getItem("token") !== null;
   const userRole = localStorage.getItem("userRole");
   const [categories, setCategories] = useState([]);
+
   const fetchCategories = async () => {
     const response = await getAllCategories();
     if (response) {
       setCategories(response);
     }
   };
+
   useEffect(() => {
     fetchCategories();
   }, []);
+
   const getcarttotalitems = () => {
     let cart = JSON.parse(localStorage.getItem("cart"));
     if (cart) {
@@ -41,13 +44,29 @@ const Navbar = ({ reloadnavbar }) => {
     navigate("/login", { replace: true });
   };
 
+  // Add this function to handle home navigation based on user role
+    const navigateHome = () => {
+      if (userRole === "livreur") {
+        navigate("/livreur");
+      } else {
+        navigate("/");
+      }
+    };
+
   const [shows3, setshows3] = useState(false);
   const [search, setsearch] = useState("");
 
   return (
     <nav>
       <div className="s1">
-        <img src={logo} alt="logo" className="logo" />
+        {/* Update the logo click to use navigateHome */}
+        <img 
+          src={logo} 
+          alt="logo" 
+          className="logo" 
+          onClick={navigateHome}
+          style={{ cursor: "pointer" }}
+        />
 
         <div className="right">
           {userRole === "client" && (
@@ -100,7 +119,6 @@ const Navbar = ({ reloadnavbar }) => {
                 </>
               ) : (
                 <>
-                  {" "}
                   <Dropdown.Item as={Link} to="/login">
                     Login
                   </Dropdown.Item>
@@ -115,14 +133,16 @@ const Navbar = ({ reloadnavbar }) => {
       </div>
 
       <div className="s2">
-        <Link to="/">Home</Link>
+        {/* Update Home link to use navigateHome */}
+        <span onClick={navigateHome} style={{ cursor: "pointer" }}>Home</span>
+        
         <Dropdown>
           <Dropdown.Toggle variant="" id="dropdown-basic">
             Categories
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {categories.map((cat) => (
-              <Dropdown.Item as={Link} to={`/categories/${cat._id}`}>
+              <Dropdown.Item key={cat._id} as={Link} to={`/categories/${cat._id}`}>
                 {cat.label}
               </Dropdown.Item>
             ))}
@@ -150,7 +170,13 @@ const Navbar = ({ reloadnavbar }) => {
 
       <div className="s3">
         <div className="s31">
-          <img src={logo} alt="logo" className="logo" />
+          <img 
+            src={logo} 
+            alt="logo" 
+            className="logo" 
+            onClick={navigateHome}
+            style={{ cursor: "pointer" }}
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

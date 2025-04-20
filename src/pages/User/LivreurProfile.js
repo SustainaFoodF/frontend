@@ -4,13 +4,14 @@ import Footer1 from "../../COMPONENTS/Footer/Footer1";
 import Footer2 from "../../COMPONENTS/Footer/Footer2";
 import Navbar from "../../COMPONENTS/Navbar/Navbar";
 import SingleBanner from "../../COMPONENTS/Banners/SingleBanner";
-import UserSidebar from "../../COMPONENTS/UserProfile/UserSidebar";
 import AccountSettings from "../../COMPONENTS/UserProfile/AccountSettings";
 import ChangePassword from "../../COMPONENTS/UserProfile/ChangePassword";
 import Liste from "../../COMPONENTS/UserProfile/Livraison";
 import "./LivreurProfile.css";
 import loginImage from "../../pages/user-profile-icon-symbol-template-free-vector.jpg";
 import { FaCommentDots } from "react-icons/fa";
+import LivreurSidebar from "../../COMPONENTS/UserProfile/LivreurSidebar";
+
 
 const LivreurProfile = () => {
   const { activepage } = useParams();
@@ -32,22 +33,26 @@ const LivreurProfile = () => {
 
     const fetchUserByEmail = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5001/livreur/email/${email}`
-        );
+        console.log("🔄 Requête en cours pour récupérer l'utilisateur...");
+        const response = await fetch(`http://localhost:5001/user/email/${email}`);
+
         if (!response.ok) {
-          throw new Error(`Erreur HTTP : ${response.status}`);
+            throw new Error(`Erreur HTTP : ${response.status} - ${response.statusText}`);
         }
+
         const data = await response.json();
+        console.log("✅ Données utilisateur récupérées :", data);
+
         if (data.success && data.user) {
-          setUser(data.user);
+            console.log("📸 Image récupérée :", data.user.image);
+            setUser(data.user);
         } else {
-          throw new Error("Les données utilisateur sont invalides.");
+            throw new Error("Les données utilisateur sont invalides.");
         }
-      } catch (err) {
-        setError("Erreur lors de la récupération des informations du livreur.");
-        console.error(err);
-      }
+    } catch (err) {
+        setError("Erreur lors de la récupération des informations utilisateur.");
+        console.error("❌ Détails de l'erreur :", err);
+    }
     };
 
     fetchUserByEmail();
@@ -88,12 +93,14 @@ const LivreurProfile = () => {
 
       <div className="livreurprofilein">
         <div className="left">
-          <UserSidebar activepage={activepage} />
+          <LivreurSidebar activepage={activepage} />
         </div>
         <div className="right">
           {activepage === "accountsettings" && <AccountSettings />}
+          {activepage === "history" && <Liste />}
           {activepage === "changepassword" && <ChangePassword />}
-          {activepage === "livraisons" && <Liste />}
+          {/* {activepage === "orders" && <TaskDashboard />} */}
+          
         </div>
       </div>
 

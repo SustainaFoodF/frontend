@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles.css';
+import './IssueReportingModal.css';
 
 const IssueReportingModal = ({ taskId, onClose }) => {
   const [issueType, setIssueType] = useState("");

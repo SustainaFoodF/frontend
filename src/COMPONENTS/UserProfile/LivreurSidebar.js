@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./UserSidebar.css"; // Reuse the same CSS
+import "./BSidebar.css"; 
 
 const SidebarLink = ({ to, activePage, pageName, icon, label }) => (
   <Link to={to} className={activePage === pageName ? "stylenone" : ""}>

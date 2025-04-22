@@ -11,6 +11,7 @@ import loginImage from "../../pages/user-profile-icon-symbol-template-free-vecto
 import { FaCommentDots } from "react-icons/fa";
 import LivreurSidebar from "../../COMPONENTS/UserProfile/LivreurSidebar";
 import LivreurNavbar from "../../COMPONENTS/Navbar/LivreurNavBar";
+import UserAddress from "../../COMPONENTS/UserProfile/UserAddress";
 
 
 const LivreurProfile = () => {
@@ -98,6 +99,7 @@ const LivreurProfile = () => {
         <div className="right">
           {activepage === "accountsettings" && <AccountSettings />}
           {activepage === "history" && <Liste />}
+          {activepage === "address" && <UserAddress userId={user._id} />}
           {activepage === "changepassword" && <ChangePassword />}
           {/* {activepage === "orders" && <TaskDashboard />} */}
           

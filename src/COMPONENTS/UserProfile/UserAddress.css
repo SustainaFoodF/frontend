@@ -126,8 +126,60 @@
     margin: 10px 0px;
 }
 
+.error-input {
+    border: 1px solid red !important;
+}
+
+.error-text {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin: 10px 0;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+/* Add this to your UserAddress.css file */
+
+.addressin .address .editbtn {
+    background-color: var(--col1);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 40px; /* Positioned to the left of the delete button */
+    top: -10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addressin .address .editbtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.addressin .address .delbtn svg {
+    width: 20px;
+    height: 20px;
+}
+
 
 @media (max-width: 1000px) {
+    .addressin .address .editbtn {
+        right: 40px; /* Maintain position relative to delete button */
+    }
     .useraddress .addnewbtn{
         width: 40px;
         height: 40px;

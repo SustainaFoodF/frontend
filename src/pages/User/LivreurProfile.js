@@ -12,6 +12,7 @@ import { FaCommentDots } from "react-icons/fa";
 import LivreurSidebar from "../../COMPONENTS/UserProfile/LivreurSidebar";
 import LivreurNavbar from "../../COMPONENTS/Navbar/LivreurNavBar";
 import UserAddress from "../../COMPONENTS/UserProfile/UserAddress";
+import TaskDashboard from "../../COMPONENTS/Livreur/components/TaskDashboard";
 
 
 const LivreurProfile = () => {
@@ -98,6 +99,7 @@ const LivreurProfile = () => {
         </div>
         <div className="right">
           {activepage === "accountsettings" && <AccountSettings />}
+          {activepage === "dashboard" && <TaskDashboard />}
           {activepage === "history" && <Liste />}
           {activepage === "address" && <UserAddress userId={user._id} />}
           {activepage === "changepassword" && <ChangePassword />}

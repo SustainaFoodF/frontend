@@ -30,13 +30,7 @@ export const updateTaskStatus = (taskId, status) => {
   return api.post(`/livreur/tasks/${taskId}/status`, { status });
 };
 
-export const reportTaskIssue = (taskId, issueData) => {
-  const formData = new FormData();
-  formData.append('issueType', issueData.issueType);
-  formData.append('details', issueData.details);
-  if (issueData.image) {
-    formData.append('image', issueData.image);
-  }
+export const reportTaskIssue = (taskId, formData) => {
   return api.post(`/livreur/tasks/${taskId}/issue`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',

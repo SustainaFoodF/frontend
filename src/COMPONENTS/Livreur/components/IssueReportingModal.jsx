@@ -48,17 +48,17 @@ const IssueReportingModal = ({ taskId, onClose, onIssueReported }) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-
+  
     try {
-      const issueData = {
-        type: issueType,
-        details,
-        image: photo
-      };
+      const formData = new FormData();
+      formData.append('type', issueType);
+      formData.append('details', details);
+      if (photo) {
+        formData.append('image', photo);
+      }
       
-      const response = await reportTaskIssue(taskId, issueData);
+      const response = await reportTaskIssue(taskId, formData);
       
-      // Callback to parent component if needed
       if (onIssueReported) {
         onIssueReported(response.data);
       }

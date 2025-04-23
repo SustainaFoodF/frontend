@@ -48,6 +48,7 @@ function Login() {
           if (token && user && user._id) {
             handleSuccess("Connexion réussie !");
             saveLoginDataToLocalStorage(user, token);
+            console.log("   " + token + "  ")
 
             // Redirection basée sur le rôle utilisateur
             setTimeout(() => {

@@ -1,0 +1,131 @@
+/* Styling for the post container */
+.post-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 16px;
+  margin: 10px auto;
+}
+
+/* Styling for the header with title */
+.post-container .post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.post-container .post-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.post-container .post-time {
+  font-size: 14px;
+  color: #888;
+}
+
+/* Styling for the post text */
+.post-container .post-body .post-text {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* Styling for the footer buttons */
+.post-container .post-footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.post-container .like-btn,
+.post-container .comment-btn {
+  padding: 8px 16px;
+  background-color: #f0f2f5;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.like-btn-selected {
+  background-color: #007bff !important;
+  color: white !important;
+}
+.post-container .like-btn:hover,
+.post-container .comment-btn:hover {
+  background-color: #e4e6eb;
+}
+
+.post-container .like-btn {
+  color: #1d2129;
+}
+
+.post-container .comment-btn {
+  color: #1d2129;
+}
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.file-item {
+  position: relative;
+  width: 120px; /* Adjust width as needed */
+  height: 120px; /* Adjust height as needed */
+  text-align: center;
+}
+
+.file-item img,
+.file-item video {
+  width: 100%;
+  max-height: 100px;
+  border-radius: 5px;
+}
+
+.file-item a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.file-item a:hover {
+  text-decoration: underline;
+}
+.post-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+.update-btn,
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
+}
+
+/* Default colors */
+.update-btn {
+  color: #007bff;
+}
+
+.delete-btn {
+  color: red;
+}
+
+/* Hover effects */
+.update-btn:hover,
+.delete-btn:hover {
+  color: darkblue;
+}
+
+.delete-btn:hover {
+  color: darkred;
+}

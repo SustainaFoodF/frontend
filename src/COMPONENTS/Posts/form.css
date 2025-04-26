@@ -1,0 +1,145 @@
+/* General form styling */
+.post-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.post-form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form group and labels */
+.post-form .form-group {
+  margin-bottom: 15px;
+}
+
+.post-form .form-group label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Input and textarea fields */
+.post-form .form-group input,
+.post-form .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.post-form .form-group input:focus,
+.post-form .form-group textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Submit button */
+.post-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.post-form button:hover {
+  background-color: #0056b3;
+}
+
+.post-form button:disabled {
+  background-color: #c6c6c6;
+  cursor: not-allowed;
+}
+
+/* Error message */
+.post-form .error {
+  color: #ff4d4d;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* File preview container */
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Individual file preview */
+.file-preview img,
+.file-preview video {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 5px;
+}
+
+/* File links */
+.file-preview a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.file-preview a:hover {
+  text-decoration: underline;
+}
+
+/* Generic file display */
+.file-preview p {
+  background-color: #f3f3f3;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+/* Delete button styling */
+.file-item {
+  position: relative;
+}
+
+.delete-btn-x {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: none;
+  border: none;
+   cursor: pointer;
+  font-size: 8px;
+  z-index: 10;
+  display: none; /* Hide by default */
+}
+
+.file-item:hover .delete-btn-x {
+  display: block; /* Show on hover */
+}
+
+ .buttons-zone{
+  display:  flex;
+  flex-direction: row;
+  gap: 10px;
+ }
+ .cancel-update{
+  background-color: rgb(239, 61, 61)!important;
+ }

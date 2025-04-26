@@ -1,0 +1,16 @@
+.barcode-scanner {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .product-result {
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+  }
+  
+  .modal-body img {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }

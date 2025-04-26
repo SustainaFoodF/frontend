@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { addReview, deleteReview } from "../../services/postService";
 import Comments from "./comments";
 import { createComment } from "../../services/commentService";
+import { analyzeCommentsWithGemini } from "./helper";
 
 export default function ViewPost({
   isOwner,
@@ -17,6 +18,9 @@ export default function ViewPost({
   const [searchTerm, setSearchTerm] = useState("");
   const [commentFilter, setCommentFilter] = useState("newest");
   const [filteredComments, setFilteredComments] = useState([]);
+  const [openAnalyze, setOpenAnalyze] = useState(false);
+  const [loadingAnalyze, setLoadingAnalyze] = useState(false);
+  const [aiReviewSummary, setAiReviewSummary] = useState(null);
 
   const loggedInUserId = localStorage.getItem("loggedInUserId");
 
@@ -35,15 +39,19 @@ export default function ViewPost({
     }
 
     let filtered = [...post.comments];
-    
+
     // Apply search filter if there's a search term
     if (searchTerm.trim()) {
-      filtered = filtered.filter(comment => 
-        comment.value.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (comment.creator?.name && comment.creator.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      filtered = filtered.filter(
+        (comment) =>
+          comment.value.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (comment.creator?.name &&
+            comment.creator.name
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()))
       );
     }
-    
+
     // Apply sorting
     switch (commentFilter) {
       case "newest":
@@ -55,12 +63,14 @@ export default function ViewPost({
       case "popularity":
         // Assuming comments might have likes or similar metrics
         // If not, this would behave similar to newest
-        filtered.sort((a, b) => (b.likes?.length || 0) - (a.likes?.length || 0));
+        filtered.sort(
+          (a, b) => (b.likes?.length || 0) - (a.likes?.length || 0)
+        );
         break;
       default:
         filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     }
-    
+
     setFilteredComments(filtered);
   }, [post?.comments, searchTerm, commentFilter]);
 
@@ -93,10 +103,23 @@ export default function ViewPost({
 
   // Format date for better readability
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
-
+  async function startAnalyze() {
+    setOpenAnalyze(true);
+    setLoadingAnalyze(true);
+    const summary = await analyzeCommentsWithGemini(filteredComments);
+    console.log(summary);
+    setAiReviewSummary(summary);
+    setLoadingAnalyze(false);
+  }
   return (
     <div className="post-container">
       <div className="post-header">
@@ -106,6 +129,9 @@ export default function ViewPost({
           <div className="post-actions">
             <button className="update-btn" onClick={() => setMode("edit")}>
               update
+            </button>
+            <button className="update-btn" onClick={() => startAnalyze()}>
+              Analyze{" "}
             </button>
             <button className="delete-btn" onClick={handleDelete}>
               delete
@@ -200,6 +226,28 @@ export default function ViewPost({
           <i className="fa-solid fa-comment"></i> {post?.comments?.length || 0}
         </button>
       </div>
+      {openAnalyze && (
+        <>
+          {loadingAnalyze ? (
+            <>Loading in progress ... </>
+          ) : (
+            <>
+              {aiReviewSummary && (
+                <div className="ai-review-summary">
+                  <h4>🔎 AI Review Summary</h4>
+                  <p>👍 Positive Comments: {aiReviewSummary.positiveCount}</p>
+                  <p>👎 Negative Comments: {aiReviewSummary.negativeCount}</p>
+                  <p>🟢 Positive Summary: {aiReviewSummary.positiveSummary}</p>
+                  <p>🔴 Negative Summary: {aiReviewSummary.negativeSummary}</p>
+                  <p>
+                    🧠 Overall Sentiment: {aiReviewSummary.overallSentiment}
+                  </p>
+                </div>
+              )}
+            </>
+          )}
+        </>
+      )}
       {openComment && (
         <>
           <div className="comment-controls">

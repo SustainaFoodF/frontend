@@ -13,7 +13,7 @@ import LivreurSidebar from "../../COMPONENTS/UserProfile/LivreurSidebar";
 import LivreurNavbar from "../../COMPONENTS/Navbar/LivreurNavBar";
 import UserAddress from "../../COMPONENTS/UserProfile/UserAddress";
 import TaskDashboard from "../../COMPONENTS/Livreur/components/TaskDashboard";
-
+import Weather from "../../COMPONENTS/Livreur/components/weather";
 
 const LivreurProfile = () => {
   const { activepage } = useParams();
@@ -36,25 +36,31 @@ const LivreurProfile = () => {
     const fetchUserByEmail = async () => {
       try {
         console.log("🔄 Requête en cours pour récupérer l'utilisateur...");
-        const response = await fetch(`http://localhost:5001/user/email/${email}`);
+        const response = await fetch(
+          `http://localhost:5001/user/email/${email}`
+        );
 
         if (!response.ok) {
-            throw new Error(`Erreur HTTP : ${response.status} - ${response.statusText}`);
+          throw new Error(
+            `Erreur HTTP : ${response.status} - ${response.statusText}`
+          );
         }
 
         const data = await response.json();
         console.log("✅ Données utilisateur récupérées :", data);
 
         if (data.success && data.user) {
-            console.log("📸 Image récupérée :", data.user.image);
-            setUser(data.user);
+          console.log("📸 Image récupérée :", data.user.image);
+          setUser(data.user);
         } else {
-            throw new Error("Les données utilisateur sont invalides.");
+          throw new Error("Les données utilisateur sont invalides.");
         }
-    } catch (err) {
-        setError("Erreur lors de la récupération des informations utilisateur.");
+      } catch (err) {
+        setError(
+          "Erreur lors de la récupération des informations utilisateur."
+        );
         console.error("❌ Détails de l'erreur :", err);
-    }
+      }
     };
 
     fetchUserByEmail();
@@ -103,8 +109,8 @@ const LivreurProfile = () => {
           {activepage === "history" && <Liste />}
           {activepage === "address" && <UserAddress userId={user._id} />}
           {activepage === "changepassword" && <ChangePassword />}
+          {activepage === "weather" && <Weather />}
           {/* {activepage === "orders" && <TaskDashboard />} */}
-          
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./BSidebar.css"; 
+import "./BSidebar.css";
 
 const SidebarLink = ({ to, activePage, pageName, icon, label }) => (
   <Link to={to} className={activePage === pageName ? "stylenone" : ""}>
@@ -102,6 +102,13 @@ const LivreurSidebar = ({ activepage }) => {
         pageName="notifications"
         icon={<span>🔔</span>}
         label="Notifications"
+      />
+      <SidebarLink
+        to="/livreur/weather"
+        activePage={activepage}
+        pageName="weather"
+        icon={<span>💧 💨</span>}
+        label="Weather"
       />
     </div>
   );

@@ -178,6 +178,21 @@ const UserSidebar = ({ activepage, userRole }) => {
             icon={<span>📝</span>} // Updated icon for posts
             label="Posts"
           />
+
+          <SidebarLink
+            to="/client/recipeDetector"
+            activePage={activepage}
+            pageName="RecipeDetector"
+            icon={<span>📝</span>} // Updated icon for posts
+            label="RecipeDetector"
+          />
+          <SidebarLink
+            to="/client/recipeGenerator"
+            activePage={activepage}
+            pageName="RecipeGenerator"
+            icon={<span>📝</span>} // Updated icon for posts
+            label="RecipeGenerator"
+          />
         </>
       )}
     </div>

@@ -14,7 +14,8 @@ import loginImage from "../../pages/user-profile-icon-symbol-template-free-vecto
 import { FaCommentDots } from "react-icons/fa";
 import PostsComponent from "../../COMPONENTS/Posts";
 import CommandPage from "../../COMPONENTS/Command";
-
+import RecipeDetector from "../../COMPONENTS/RecipeDetector";
+import RecipeGenerator from "../../COMPONENTS/Client/RecipeGenerator"
 const UserProfile = () => {
   const { activepage } = useParams();
   const [user, setUser] = useState(null);
@@ -92,6 +93,8 @@ const UserProfile = () => {
           {activepage === "yourorders" && <CommandPage />}
           {activepage === "legalnotice" && <LegalNotice />}
           {activepage === "posts" && <PostsComponent />}
+          {activepage === "recipeDetector" && <RecipeDetector />}
+          {activepage === "recipeGenerator" && <RecipeGenerator />}
         </div>
       </div>
 

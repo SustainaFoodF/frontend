@@ -1,0 +1,105 @@
+/* General badge styles */
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 15px;
+  color: white;
+}
+
+/* Category Badge */
+.badge-category {
+  background-color: #589ce5;
+}
+
+/* Quantity Badge */
+.badge-quantity {
+  background-color: #6de88a;
+}
+
+/* Price Badge */
+.badge-price {
+  background-color: #efb969;
+}
+
+/* Expiration Badge */
+.badge-expiry {
+  background-color: #d26f78;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #555;
+}
+
+.product-category,
+.product-quantity,
+.product-price,
+.product-expiry {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.product-options {
+  margin-top: 10px;
+  position: relative;
+}
+
+.options-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.options-dropdown {
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.options-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.options-dropdown button:hover {
+  background: #f0f0f0;
+}
+/* Product Info Container */
+.product-info {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Ensures wrapping if needed */
+  gap: 10px; /* Spacing between badges */
+}

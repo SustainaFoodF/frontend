@@ -1,16 +1,40 @@
 import { useState } from "react";
 import { addProductToCart } from "../../services/cartService";
+import { getNutritionInfo } from "../../services/nutritionService";
+import './productCard.css';
+
 
 export default function ProductCard({ product, index, setReloadNavbar }) {
   const [showCountOption, setShowCountOption] = useState(false);
   const [count, setCount] = useState(0);
+  const [nutritionInfo, setNutritionInfo] = useState(null);
+  const [showNutrition, setShowNutrition] = useState(false);
+
   const handleAddToCart = () => {
     addProductToCart(product, count);
     setReloadNavbar((prev) => !prev);
     setShowCountOption(false);
-
     setCount(1);
   };
+
+  const handleShowNutrition = async () => {
+    try {
+      const info = await getNutritionInfo(product.label);
+      setNutritionInfo(info);
+      setShowNutrition(true);
+    } catch (error) {
+      console.error("Failed to fetch nutrition info:", error);
+      setNutritionInfo({
+        error: "Impossible de charger les informations nutritionnelles"
+      });
+      setShowNutrition(true); // Montre quand même la section avec le message d'erreur
+    }
+  };
+
+  const handleHideNutrition = () => {
+    setShowNutrition(false);
+  };
+
   return (
     <div className="product" key={index}>
       <div className="s1">
@@ -26,6 +50,7 @@ export default function ProductCard({ product, index, setReloadNavbar }) {
       <div className="s3">
         <p>Quantite : {product.quantity}</p>
       </div>
+
       {showCountOption ? (
         <div className="addbtn">
           <div className="qty">
@@ -84,6 +109,32 @@ export default function ProductCard({ product, index, setReloadNavbar }) {
           </svg>
         </div>
       )}
+
+<div className="nutrition-section">
+  {!showNutrition ? (
+    <button className="nutrition-btn show-btn" onClick={handleShowNutrition}>
+      Show Nutrition Info
+    </button>
+  ) : (
+    <div className="nutrition-info">
+      <h4>Nutrition Information:</h4>
+      {nutritionInfo ? (
+        <ul>
+          <li>Calories: {nutritionInfo.calories}</li>
+          <li>Proteins: {nutritionInfo.proteins}g</li>
+          <li>Fats: {nutritionInfo.fats}g</li>
+          <li>Carbs: {nutritionInfo.carbs}g</li>
+        </ul>
+      ) : (
+        <p>Loading nutrition info...</p>
+      )}
+      <button className="nutrition-btn hide-btn" onClick={handleHideNutrition}>
+        Hide Nutrition Info
+      </button>
+    </div>
+  )}
+</div>
+
     </div>
   );
 }

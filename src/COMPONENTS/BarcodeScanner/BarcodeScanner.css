@@ -1,0 +1,116 @@
+.barcode-scanner {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .product-result {
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+  }
+  
+  .modal-body img {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
+  /* Ajoutez ceci à votre fichier CSS */
+.custom-modal {
+  max-width: 350px !important;
+  margin: 0 auto;
+}
+
+.custom-modal .modal-content {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.custom-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #666;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.custom-close-btn:hover {
+  color: #333;
+}
+
+.file-input-label {
+  display: block;
+  padding: 30px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 15px;
+}
+
+.file-input-label:hover {
+  border-color: var(--col1);
+  background-color: rgba(0,0,0,0.02);
+}
+/* Style pour la popup personnalisée */
+.custom-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.custom-popup {
+  width: 350px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  padding: 25px;
+}
+
+.custom-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.custom-popup-close:hover {
+  color: #333;
+}
+
+.file-input-wrapper {
+  margin-bottom: 15px;
+}
+
+.file-input-label {
+  display: block;
+  padding: 30px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.file-input-label:hover {
+  border-color: var(--col1);
+  background-color: rgba(0, 0, 0, 0.02);
+}

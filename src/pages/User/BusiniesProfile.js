@@ -17,6 +17,7 @@ import UserAddress from "../../COMPONENTS/UserProfile/UserAddress";
 import CommandPage from "../../COMPONENTS/Command";
 import PostsComponent from "../../COMPONENTS/Posts";
 import AnalysisComponent from "../../COMPONENTS/Business/analyse";
+import AffecterTaches from "../../COMPONENTS/AffecterTaches";
 
 const BusinessProfile = () => {
   const { activepage } = useParams();
@@ -102,6 +103,7 @@ const BusinessProfile = () => {
           <div className="right">
             {activepage === "accountsettings" && <AccountSettings />}
             {activepage === "changepassword" && <ChangePassword />}
+            {activepage === "affectertaches" && <AffecterTaches />}
             {activepage === "address" && <UserAddress userId={user._id} />}
             {activepage === "yourorders" && <CommandPage />}
             {activepage === "categories" && <Categories />}

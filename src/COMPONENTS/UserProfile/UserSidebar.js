@@ -104,6 +104,13 @@ const UserSidebar = ({ activepage, userRole }) => {
             label="Categories"
           />
           <SidebarLink
+            to="/business/affectertaches"
+            activePage={activepage}
+            pageName="affectertaches"
+            icon={<span>✅</span>}
+            label="Affecter Tâches"
+          />
+          <SidebarLink
             to="/business/products"
             activePage={activepage}
             pageName="products"

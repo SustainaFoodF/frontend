@@ -1,0 +1,39 @@
+/* livreurhome.css - Adjusted for scrolling sidebar */
+
+.livreur-home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.livreur-content-wrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 60px; /* Space for navbar */
+}
+
+.livreur-main-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px; /* Match sidebar width */
+  transition: margin-left 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .livreur-main-content {
+    margin-left: 80px; /* Match collapsed sidebar width */
+  }
+}
+
+@media (max-width: 480px) {
+  .livreur-content-wrapper {
+    flex-direction: column;
+  }
+  
+  .livreur-main-content {
+    margin-left: 0;
+    margin-bottom: 60px; /* Space for bottom sidebar on mobile */
+    padding: 15px;
+  }
+}

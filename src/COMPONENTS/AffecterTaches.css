@@ -1,0 +1,109 @@
+/* 🎯 Conteneur principal */
+.affectertaches {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.affectertaches:hover {
+    transform: scale(1.02);
+}
+
+/* 🔥 Titre principale */
+.affectertaches h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 📝 Formulaire */
+.affectertaches .form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.affectertaches .form-group label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+/* 🔹 Sélecteurs (dropdowns) */
+.affectertaches .form-group select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    color: #2c3e50;
+}
+
+.affectertaches .form-group select:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+}
+
+/* 🔘 Bouton d'affectation */
+.affectertaches .assign-button {
+    padding: 12px 25px;
+    background: #27ae60;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.affectertaches .assign-button:hover {
+    background: #1e8449;
+    transform: scale(1.05);
+}
+
+.affectertaches .assign-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+    .affectertaches {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .affectertaches h2 {
+        font-size: 20px;
+    }
+
+    .affectertaches .form-group label {
+        font-size: 14px;
+    }
+
+    .affectertaches .assign-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+.affectertaches .loading {
+    color: #888;
+    font-size: 16px;
+    text-align: center;
+}

@@ -1,74 +1,51 @@
-import { useEffect, useState } from "react";
+// src/components/WeatherComponent.js
+import React, { useState } from "react";
+import { fetchCurrentWeather } from "./helper";
 import "./weather.css";
-import { getCoordinatesByCity, getWeatherByCoordinates } from "./helper";
 
-function Weather() {
-  const [city, setCity] = useState("Tunis");
-  const [weather, setWeather] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const WeatherComponent = () => {
+  const [city, setCity] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const fetchWeather = async () => {
+  const getWeather = async () => {
+    if (!city) return;
+    setLoading(true);
+    setError("");
     try {
-      setLoading(true);
-      setError(null);
-
-      const { lat, lon } = await getCoordinatesByCity(city);
-      const weatherData = await getWeatherByCoordinates(lat, lon);
-      setWeather(weatherData);
+      const data = await fetchCurrentWeather(city);
+      setWeatherData(data);
     } catch (err) {
-      setError(err.message);
+      setError("City not found or connection error.");
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchWeather();
-    // eslint-disable-next-line
-  }, []);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    fetchWeather();
-  };
-
   return (
-    <div className="app-container">
-      <h1>🇹🇳 Tunisia Weather App</h1>
+    <div className="weather-container">
+      <h2>Live Weather</h2>
+      <input
+        type="text"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        placeholder="Enter a city"
+      />
+      <button onClick={getWeather}>Search</button>
 
-      <form onSubmit={handleSearch} className="search-form">
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter city name (ex: Sfax, Sousse)"
-        />
-        <button type="submit">Search</button>
-      </form>
-
-      {loading && <p>Loading weather...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {weather && (
-        <div className="weather-card">
-          <h2>🌍 {city}</h2>
-          <p>{weather.current.weather[0].description}</p>
-          <p>🌡 Temperature: {Math.round(weather.current.temp)}°C</p>
-          <p>💧 Humidity: {weather.current.humidity}%</p>
-          <p>💨 Wind: {weather.current.wind_speed} m/s</p>
-
-          {/* Tomorrow Forecast */}
-          <h3>📅 Tomorrow's Forecast</h3>
-          <p>
-            🌡 Min: {Math.round(weather.daily[1].temp.min)}°C / Max:{" "}
-            {Math.round(weather.daily[1].temp.max)}°C
-          </p>
-          <p>Condition: {weather.daily[1].weather[0].description}</p>
+      {loading && <p>Loading...</p>}
+      {error && <p className="error">{error}</p>}
+      {weatherData && (
+        <div className="weather-info">
+          <h3>{weatherData.location.country}</h3>
+          <p>Temperature: {weatherData.current.temp_c}°C</p>
+          <p>Condition: {weatherData.current.condition.text}</p>
+          <img src={weatherData.current.condition.icon} alt="Weather icon" />
         </div>
       )}
     </div>
   );
-}
+};
 
-export default Weather;
+export default WeatherComponent;

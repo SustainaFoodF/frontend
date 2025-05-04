@@ -27,6 +27,7 @@ function App() {
   const clientId = "25896799255-5aeddf554q7636tdd7t16ifbah7us55f.apps.googleusercontent.com";
 
   const PrivateRoute = ({ element }) => {
+    console.log("isAuthenticated", isAuthenticated);
     return isAuthenticated ? element : <Navigate to="/login" />;
   };
 
@@ -51,8 +52,8 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
 
 
-          <Route path="/livreur/*" element={<PrivateRoute element={<Livreurhome />} />} />
-          <Route path="/livreur/:activepage" element={<PrivateRoute element={<LivreurProfile />} />} />
+          <Route path="/livreur"  element={<Livreurhome />}  />
+          <Route path="/livreur/:activepage" element={<LivreurProfile />}  />
 
 
 

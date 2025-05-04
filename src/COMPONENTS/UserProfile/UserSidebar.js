@@ -200,6 +200,13 @@ const UserSidebar = ({ activepage, userRole }) => {
             icon={<span>📝</span>} // Updated icon for posts
             label="RecipeGenerator"
           />
+            <SidebarLink
+            to="/client/food-image-generator"
+            activePage={activepage}
+            pageName="RecipeGenerator"
+            icon={<span>🍔</span>} 
+            label="food-image-generator" 
+          />
         </>
       )}
     </div>

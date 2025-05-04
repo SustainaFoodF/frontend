@@ -12,7 +12,6 @@ export const createPost = async (postData) => {
     throw error;
   }
 };
-
 // Function to get all posts
 export const getAllPosts = async () => {
   try {

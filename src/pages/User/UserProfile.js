@@ -16,6 +16,8 @@ import PostsComponent from "../../COMPONENTS/Posts";
 import CommandPage from "../../COMPONENTS/Command";
 import RecipeDetector from "../../COMPONENTS/RecipeDetector";
 import RecipeGenerator from "../../COMPONENTS/Client/RecipeGenerator"
+import FoodGenerator from "../../COMPONENTS/food-image-generator";
+//import food-image-generator from "../../COMPONENTS/Client/food-image-generator"
 const UserProfile = () => {
   const { activepage } = useParams();
   const [user, setUser] = useState(null);
@@ -95,6 +97,7 @@ const UserProfile = () => {
           {activepage === "posts" && <PostsComponent />}
           {activepage === "recipeDetector" && <RecipeDetector />}
           {activepage === "recipeGenerator" && <RecipeGenerator />}
+          {activepage === "food-image-generator" && <FoodGenerator />}
         </div>
       </div>
 

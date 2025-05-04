@@ -1,47 +1,20 @@
+// src/weatherApi.js
 import axios from "axios";
 
-const API_KEY = "2572ed4a0257fa7a987ffd5229836841"; // It's public now, OK for testing
-const GEO_URL = "https://api.openweathermap.org/geo/1.0/direct";
-const WEATHER_URL = "https://api.openweathermap.org/data/2.5/onecall";
+const API_KEY = "babb8c9644bb4d969da170731252904"; // Remplacez par votre clé API WeatherAPI
+const BASE_URL = "https://api.weatherapi.com/v1";
 
-// 1. Get coordinates (lat/lon) by city name
-export const getCoordinatesByCity = async (city = "Tunis") => {
+export const fetchCurrentWeather = async (city) => {
   try {
-    const response = await axios.get(GEO_URL, {
+    const response = await axios.get(`${BASE_URL}/current.json`, {
       params: {
-        q: `London`, // TN = Tunisia
-        limit: 1,
-        appid: API_KEY,
+        key: API_KEY,
+        q: city,
+        aqi: "no",
       },
     });
-
-    if (response.data.length === 0) {
-      throw new Error("City not found");
-    }
-
-    const { lat, lon } = response.data[0];
-    return { lat, lon };
-  } catch (error) {
-    throw new Error("Failed to fetch coordinates");
-  }
-};
-
-// 2. Get full weather using OneCall API
-export const getWeatherByCoordinates = async (lat, lon) => {
-  try {
-    const response = await axios.get(WEATHER_URL, {
-      params: {
-        lat,
-        lon,
-        exclude: "minutely,alerts",
-        appid: API_KEY,
-        units: "metric",
-        lang: "en",
-      },
-    });
-
     return response.data;
   } catch (error) {
-    throw new Error("Failed to fetch weather data");
+    throw error;
   }
 };

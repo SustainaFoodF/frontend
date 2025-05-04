@@ -281,6 +281,7 @@ export default function ViewPost({
             </div>
           )}
           <Comments
+            postId={post._id}
             data={filteredComments}
             onCommentSubmit={handleSubmitComment}
           />

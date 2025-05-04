@@ -5,9 +5,9 @@ import ViewPost from "./viewPost";
 import { PostForm } from "./form";
 
 export default function PostComponent({ post, notifyParent }) {
-  //const loggedInUserId = localStorage.getItem("loggedInUserId");
-  //const isOwner = post.creator._id === loggedInUserId;
-  const postDate = new Date(post.createdAt) // Formatting the createdAt date
+  const loggedInUserId = localStorage.getItem("loggedInUserId");
+  const isOwner =post&&post.creator&& post.creator._id === loggedInUserId;
+  const postDate = new Date(post.createdAt); // Formatting the createdAt date
   const getFileUrl = (fileName) => `http://localhost:5001/uploads/${fileName}`;
   const renderFilePreview = (fileName) => {
     const fileExt = fileName.split(".").pop().toLowerCase();
@@ -55,7 +55,7 @@ export default function PostComponent({ post, notifyParent }) {
     return (
       <ViewPost
         handleDelete={handleDelete}
-       // isOwner={isOwner}
+        isOwner={isOwner}
         post={post}
         postDate={postDate}
         renderFilePreview={renderFilePreview}

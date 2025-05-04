@@ -13,6 +13,20 @@ export const createComment = async (postData) => {
   }
 };
 
+export const saveResponse = async (postId, commentId, value) => {
+  try {
+    const response = await createData(`${apiUrl}/addResponse`, {
+      postId: postId,
+      commentId: commentId,
+      value: value,
+    });
+    return response;
+  } catch (error) {
+    console.error("Error creating post:", error);
+    throw error;
+  }
+};
+
 // Function to update a post
 export const updateComment = async (postId, commentId, value) => {
   try {

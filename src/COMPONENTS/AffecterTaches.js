@@ -13,15 +13,9 @@ const AffecterTaches = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/command/me`);
+        const response = await fetch("http://localhost:5001/command");
         const data = await response.json();
-        if (data.commands) {
-          setOrders(data.commands);
-        } else if (Array.isArray(data)) {
-          setOrders(data);
-        } else {
-          setOrders([data]);
-        }
+        setOrders(data);
       } catch (error) {
         setErrorMessage("Erreur lors de la récupération des commandes.");
       } finally {
@@ -50,6 +44,19 @@ const AffecterTaches = () => {
     fetchOrders();
     fetchDeliverers();
   }, []);
+
+  const calculateTotal = (command) =>
+    command.products.reduce(
+      (sum, item) => sum + item?.product.prix * item.quantity,
+      0
+    );
+
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   const handleAssignTask = async () => {
     if (!selectedOrder || !selectedDeliverer) {
@@ -96,9 +103,12 @@ const AffecterTaches = () => {
           {loadingOrders ? (
             <option>Chargement...</option>
           ) : (
-            orders.map((order) => (
-              <option key={order._id} value={order._id}>
-                {order._id}
+            orders.map((command) => (
+              <option key={command._id} value={command._id}>
+                {command.owner.name} —{" "}
+                {command.products.map((p) => p.product.label).join(", ")} —{" "}
+                {formatDate(command.dateLivraison)} —{" "}
+                {calculateTotal(command).toFixed(2)} Dt
               </option>
             ))
           )}

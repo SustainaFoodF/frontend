@@ -1,0 +1,30 @@
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: none;
+}
+
+.comment-button {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.comment-button:hover {
+  background-color: #145dbf;
+}

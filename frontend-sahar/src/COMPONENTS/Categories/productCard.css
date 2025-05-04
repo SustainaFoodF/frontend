@@ -1,0 +1,53 @@
+.nutrition-btn {
+    background-color: #4CAF50; /* green base color */
+    border: none;
+    color: white;
+    padding: 6px 12px; /* smaller padding */
+    font-size: 12px; /* smaller font */
+    border-radius: 6px; /* small rounded corners */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    width: auto; /* button size depends on text */
+    max-width: 90%; /* no overflow */
+    margin: 8px 0;
+  }
+  
+  .nutrition-btn:hover {
+    background-color: #45a049;
+  }
+  
+  /* Specific styles for each button */
+  .show-btn {
+    background-color: #007BFF;
+  }
+  
+  .show-btn:hover {
+    background-color: #0069d9;
+  }
+  
+  .hide-btn {
+    background-color: #dc3545;
+  }
+  
+  .hide-btn:hover {
+    background-color: #c82333;
+  }
+  .product {
+    width: 250px; /* 👈 agrandir la largeur (avant c'était peut-être 180px ou 200px ?) */
+    min-height: 400px; /* 👈 assurer une hauteur confortable */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* bien espacer */
+    transition: transform 0.2s ease;
+  }
+  
+  .product:hover {
+    transform: scale(1.02); /* un petit zoom au hover pour faire joli */
+  }
+    

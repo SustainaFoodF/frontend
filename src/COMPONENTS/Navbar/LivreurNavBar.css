@@ -1,0 +1,26 @@
+/* Livreur-specific nav styles */
+.livreur-nav {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .livreur-nav .s2.livreur-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 0;
+    background-color: #e9ecef;
+  }
+  
+  .livreur-nav .s2.livreur-links a {
+    color: #495057;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  
+  .livreur-nav .s2.livreur-links a:hover {
+    background-color: #dee2e6;
+    color: #212529;
+  }

@@ -1,0 +1,83 @@
+/* TaskCard specific styles */
+.task-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .task-info {
+    flex: 1;
+  }
+  
+  .task-status {
+    margin-top: 8px;
+  }
+  
+  .location-group {
+    margin-bottom: 8px;
+  }
+  
+  .location-label {
+    font-weight: 600;
+    margin-right: 8px;
+    color: #4b5563;
+  }
+  
+  .location-value {
+    color: #1f2937;
+  }
+  
+  .details-label {
+    font-weight: 600;
+    margin-right: 8px;
+    color: #4b5563;
+  }
+  
+  .details-value {
+    color: #1f2937;
+  }
+  
+  .status-label {
+    font-weight: 600;
+    margin-right: 8px;
+    color: #4b5563;
+  }
+  
+  .status-value {
+    text-transform: capitalize;
+  }
+  
+  .status-pending {
+    color: #f97316;
+  }
+  
+  .status-in-progress {
+    color: #3b82f6;
+  }
+  
+  .status-picked-up {
+    color: #3b82f6;
+  }
+  
+  .status-completed {
+    color: #34c759;
+  }
+  
+  .task-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .view-button {
+    background-color: #34c759;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+  }

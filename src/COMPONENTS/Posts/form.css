@@ -1,0 +1,248 @@
+/* General form styling */
+.post-form {
+  width: 100%;
+  max-width: 700px; /* Slightly wider for better content space */
+  margin: 20px auto;
+  padding: 30px;
+  background: linear-gradient(145deg, #ffffff, #f4f7fa); /* Subtle gradient */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter', sans-serif; /* Modern, clean font */
+  animation: fadeIn 0.4s ease;
+}
+
+/* Title */
+.post-form h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2d3748; /* Darker, professional color */
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Form group and labels */
+.post-form .form-group {
+  margin-bottom: 20px;
+}
+
+.post-form .form-group label {
+  display: block;
+  font-weight: 500;
+  color: #4a5568; /* Softer gray for labels */
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+/* Input and textarea fields */
+.post-form .form-group input,
+.post-form .form-group textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #e2e8f0; /* Lighter border */
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #2d3748;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-form .form-group input:focus,
+.post-form .form-group textarea:focus {
+  border-color: #3b82f6; /* Brighter blue for focus */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Subtle glow */
+  outline: none;
+}
+
+/* Textarea specific styling */
+.post-form .form-group textarea {
+  min-height: 120px;
+  resize: vertical; /* Allow vertical resize only */
+}
+
+/* Submit and cancel buttons */
+.post-form button {
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.post-form .button-posts {
+  width: 100%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa); /* Gradient button */
+  color: white;
+}
+
+.post-form .button-posts:hover {
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  transform: translateY(-1px); /* Subtle lift effect */
+}
+
+.post-form .button-posts:active {
+  transform: translateY(0);
+}
+
+.post-form .button-posts:disabled {
+  background: #d1d5db; /* Neutral gray for disabled */
+  cursor: not-allowed;
+}
+
+/* Cancel button */
+.post-form .cancel-update {
+  width: 100%;
+  background: linear-gradient(90deg, #ef4444, #f87171); /* Red gradient */
+  color: white;
+}
+
+.post-form .cancel-update:hover {
+  background: linear-gradient(90deg, #dc2626, #ef4444);
+  transform: translateY(-1px);
+}
+
+.post-form .cancel-update:active {
+  transform: translateY(0);
+}
+
+/* Error message */
+.post-form .error {
+  color: #e11d48; /* Brighter red for errors */
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+  background: #fef2f2; /* Light red background */
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* File input styling */
+.post-form .form-group input[type="file"] {
+  padding: 10px;
+  border: 2px dashed #e2e8f0; /* Dashed border for file input */
+  background-color: #f8fafc;
+  cursor: pointer;
+}
+
+.post-form .form-group input[type="file"]:hover {
+  border-color: #3b82f6;
+}
+
+/* File preview container */
+.file-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Grid layout */
+  gap: 15px;
+  margin: 15px 0;
+}
+
+/* Individual file preview */
+.file-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.file-item:hover {
+  transform: scale(1.03); /* Subtle zoom on hover */
+}
+
+.file-item img,
+.file-item video {
+  width: 100%;
+  height: 100px;
+  object-fit: cover; /* Ensure consistent image/video display */
+  border-radius: 8px;
+}
+
+/* File links */
+.file-preview a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: #3b82f6;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 8px;
+}
+
+.file-preview a:hover {
+  text-decoration: underline;
+  color: #2563eb;
+}
+
+/* Generic file display */
+.file-preview p {
+  background-color: #f1f5f9;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #4a5568;
+  text-align: center;
+}
+
+/* Delete button styling */
+.delete-btn-x {
+  position: absolute;
+  top: 8px;
+  right: 8px; /* Moved to top-right for better visibility */
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.file-item:hover .delete-btn-x {
+  opacity: 1; /* Show on hover */
+}
+
+/* Buttons zone */
+.buttons-zone {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .post-form {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .post-form h3 {
+    font-size: 1.5rem;
+  }
+
+  .buttons-zone {
+    flex-direction: column; /* Stack buttons on mobile */
+  }
+
+  .post-form button {
+    width: 100%;
+  }
+
+  .file-preview {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Smaller grid items on mobile */
+  }
+}

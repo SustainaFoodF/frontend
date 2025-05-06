@@ -1,0 +1,43 @@
+.star-rating, .star-rating-input {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  .star {
+    font-size: clamp(16px, 2vw, 20px); /* Taille responsive */
+    cursor: pointer;
+    color: #ddd;
+    transition: color 0.2s;
+    min-width: 16px; /* Largeur minimum */
+  }
+  
+  .star-rating .full, .star-rating-input .full {
+    color: #ffc107;
+  }
+  
+  .star-rating .half {
+    position: relative;
+    color: #ddd;
+  }
+  
+  .star-rating .half::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #ffc107;
+  }
+  
+  .star-rating .empty {
+    color: #ddd;
+  }
+  
+  /* Pour les très petits écrans */
+  @media (max-width: 400px) {
+    .star {
+      font-size: 14px;
+      gap: 1px;
+    }
+  }

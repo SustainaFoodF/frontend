@@ -1,0 +1,124 @@
+/* 🎯 Conteneur principal */
+.accountsettings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.accountsettings:hover {
+    transform: scale(1.02);
+}
+
+/* 🔥 Titre principal */
+.accountsettings h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 📸 Image de profil */
+.profile-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--col1, #007bff);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.08);
+}
+
+/* 📝 Formulaire */
+.accountsettings .form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+}
+
+.accountsettings .form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.accountsettings .form .form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* 🔹 Champs de saisie */
+.accountsettings .form .form-group input {
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.accountsettings .form .form-group input:focus {
+    border-color: var(--col1, #007bff);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* 🔘 Bouton de sauvegarde */
+.mainbutton1 {
+    padding: 12px 20px;
+    background: var(--col1, #007bff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mainbutton1:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+.mainbutton1:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 📱 Responsive */
+@media (max-width: 800px) {
+    .accountsettings {
+        max-width: 90%;
+    }
+
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .accountsettings h1 {
+        font-size: 20px;
+    }
+}

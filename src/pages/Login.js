@@ -3,14 +3,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSuccess } from "../utils";
 import "./Login.css";
-import { FcGoogle } from "react-icons/fc"; // Icône Google
+import { FcGoogle } from "react-icons/fc"; // Google Icon
+import { FaFaceGrin } from "react-icons/fa6"; // FaceID Icon
 
-// Importation correcte de l'image
+// Correct image import
 import loginImage from "../pages/1.png";
 import Navbar from "../COMPONENTS/Navbar/Navbar";
 
 function Login() {
-  const location = useLocation(); // Récupère l'URL actuelle
+  const location = useLocation(); // Get current URL
   const [tryToLoginFromGoogle, setTryToLoginFromGoogle] = useState(false);
   const saveLoginDataToLocalStorage = (user, token) => {
     localStorage.setItem("token", token);
@@ -27,7 +28,7 @@ function Login() {
   useEffect(() => {
     const fetchUserData = async () => {
       const params = new URLSearchParams(location.search);
-      const tokenFromUrl = params.get("token"); // Récupère le paramètre 'token'
+      const tokenFromUrl = params.get("token"); // Get 'token' parameter
 
       if (tokenFromUrl) {
         setTryToLoginFromGoogle(true);
@@ -41,24 +42,24 @@ function Login() {
           );
 
           const result = await response.json();
-          console.log("🔐 Réponse du serveur:", result);
+          console.log("🔐 Server response:", result);
 
-          // Vérification si la réponse contient bien un token et un utilisateur
+          // Check if response contains token and user
           const { token, user } = result;
           if (token && user && user._id) {
-            handleSuccess("Connexion réussie !");
+            handleSuccess("Login successful!");
             saveLoginDataToLocalStorage(user, token);
             console.log("   " + token + "  ")
 
-            // Redirection basée sur le rôle utilisateur
+            // Redirect based on user role
             setTimeout(() => {
               navigateUser(user);
             }, 1000);
           } else {
-            handleError("Connexion échouée. Vérifiez vos informations.");
+            handleError("Login failed. Please check your details.");
           }
         } catch (error) {
-          console.error("Erreur:", error.message);
+          console.error("Error:", error.message);
         }
       }
     };
@@ -85,7 +86,7 @@ function Login() {
       return handleError("Email and password are required");
 
     try {
-      console.log("📤 Envoi des informations de connexion:", loginInfo);
+      console.log("📤 Sending login details:", loginInfo);
 
       const response = await fetch("http://localhost:5001/auth/login", {
         method: "POST",
@@ -94,40 +95,45 @@ function Login() {
       });
 
       const result = await response.json();
-      console.log("🔐 Réponse du serveur:", result);
+      console.log("🔐 Server response:", result);
 
-      // Vérification si la réponse contient bien un token et un utilisateur
+      // Check if response contains token and user
       const { token, user } = result;
       if (token && user && user._id) {
-        handleSuccess("Connexion réussie !");
+        handleSuccess("Login successful!");
 
         saveLoginDataToLocalStorage(user, token);
-        // Redirection basée sur le rôle utilisateur
+        // Redirect based on user role
         setTimeout(() => {
           navigateUser(user);
         }, 1000);
       } else {
-        handleError("Connexion échouée. Vérifiez vos informations.");
+        handleError("Login failed. Please check your details.");
       }
     } catch (err) {
-      console.error("❌ Erreur lors du login:", err.message);
-      handleError("Erreur serveur. Veuillez réessayer.");
+      console.error("❌ Login error:", err.message);
+      handleError("Server error. Please try again.");
     }
   };
   const handleGoogleLogin = () => {
-    setTryToLoginFromGoogle(true); // Active le mode chargement
-    window.location.href = "http://localhost:5001/auth/google"; // Redirige vers ton backend
+    setTryToLoginFromGoogle(true); // Enable loading mode
+    window.location.href = "http://localhost:5001/auth/google"; // Redirect to backend
   };
+
+  const handleFaceIDLogin = () => {
+    navigate("/user-select"); // Redirect to user-select path
+  };
+
   return (
     <>
       <Navbar reloadnavbar={false} />
       <div className="login-container">
-        {/* Image de la page de connexion */}
+        {/* Login page image */}
         <div className="login-image">
           <img src={loginImage} alt="Login Illustration" />
         </div>
 
-        {/* Formulaire de connexion */}
+        {/* Login form */}
         <div className="login-form">
           <h1>Welcome Back</h1>
           <p>Please enter your credentials to continue</p>
@@ -144,6 +150,13 @@ function Login() {
               >
                 <FcGoogle className="google-icon" />
                 Sign in with Google
+              </button>
+              <button
+                className="faceid-login-button"
+                onClick={handleFaceIDLogin}
+              >
+                <FaFaceGrin className="faceid-icon" />
+                Login with FaceID
               </button>
               <p>Or</p>
               <form onSubmit={handleLogin}>
@@ -162,11 +175,11 @@ function Login() {
                   value={loginInfo.password}
                 />
 
-                {/* Bouton de soumission */}
+                {/* Submit button */}
                 <button type="submit" className="login-button">
                   Login
                 </button>
-                {/* Lien vers la page d'inscription */}
+                {/* Link to signup page */}
                 <p>
                   Don't have an account? <Link to="/signup">Sign up</Link>
                 </p>

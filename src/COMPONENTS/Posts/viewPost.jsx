@@ -112,6 +112,7 @@ export default function ViewPost({
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
+
   async function startAnalyze() {
     setOpenAnalyze(true);
     setLoadingAnalyze(true);
@@ -120,21 +121,22 @@ export default function ViewPost({
     setAiReviewSummary(summary);
     setLoadingAnalyze(false);
   }
+
   return (
     <div className="post-container">
       <div className="post-header">
-        <p className="post-creator">Created by: {post.creator?.name}</p>{" "}
+        <p className="post-creator">Created by: {post.creator?.name}</p>
         <p className="post-time">Posted on {formatDate(postDate)}</p>
         {isOwner && (
           <div className="post-actions">
             <button className="update-btn" onClick={() => setMode("edit")}>
-              update
+              Update
             </button>
-            <button className="update-btn" onClick={() => startAnalyze()}>
-              Analyze{" "}
+            <button className="update-btn" onClick={startAnalyze}>
+              Analyze
             </button>
             <button className="delete-btn" onClick={handleDelete}>
-              delete
+              Delete
             </button>
           </div>
         )}
@@ -162,16 +164,18 @@ export default function ViewPost({
               className="like-btn"
               onClick={() => handleAddReview("like")}
               disabled={isLoading}
+              aria-label={`Like post, ${post?.reviews?.likes?.length} likes`}
             >
               <i className="fa-solid fa-thumbs-up"></i>{" "}
               {post?.reviews?.likes?.length}
             </button>
-            <button className="like-btn">
-              <i
-                className="fa-solid fa-thumbs-down"
-                onClick={() => handleAddReview("dislike")}
-                disabled={isLoading}
-              ></i>{" "}
+            <button
+              className="like-btn"
+              onClick={() => handleAddReview("dislike")}
+              disabled={isLoading}
+              aria-label={`Dislike post, ${post?.reviews?.dislikes?.length} dislikes`}
+            >
+              <i className="fa-solid fa-thumbs-down"></i>{" "}
               {post?.reviews?.dislikes?.length}
             </button>
           </>
@@ -183,6 +187,7 @@ export default function ViewPost({
                   className="like-btn"
                   onClick={() => handleAddReview("like")}
                   disabled={isLoading}
+                  aria-label={`Like post, ${post?.reviews?.likes?.length} likes`}
                 >
                   <i className="fa-solid fa-thumbs-up"></i>{" "}
                   {post?.reviews?.likes?.length}
@@ -191,6 +196,7 @@ export default function ViewPost({
                   className="like-btn like-btn-selected"
                   disabled={isLoading}
                   onClick={() => handleDeleteReview("dislike")}
+                  aria-label={`Remove dislike, ${post?.reviews?.dislikes?.length} dislikes`}
                 >
                   <i className="fa-solid fa-thumbs-down"></i>{" "}
                   {post?.reviews?.dislikes?.length}
@@ -202,6 +208,7 @@ export default function ViewPost({
                   className="like-btn like-btn-selected"
                   disabled={isLoading}
                   onClick={() => handleDeleteReview("like")}
+                  aria-label={`Remove like, ${post?.reviews?.likes?.length} likes`}
                 >
                   <i className="fa-solid fa-thumbs-up"></i>{" "}
                   {post?.reviews?.likes?.length}
@@ -210,6 +217,7 @@ export default function ViewPost({
                   className="like-btn"
                   onClick={() => handleAddReview("dislike")}
                   disabled={isLoading}
+                  aria-label={`Dislike post, ${post?.reviews?.dislikes?.length} dislikes`}
                 >
                   <i className="fa-solid fa-thumbs-down"></i>{" "}
                   {post?.reviews?.dislikes?.length}
@@ -222,18 +230,19 @@ export default function ViewPost({
         <button
           className="comment-btn"
           onClick={() => setOpenComment(!openComment)}
+          aria-label={`View ${post?.comments?.length || 0} comments`}
         >
           <i className="fa-solid fa-comment"></i> {post?.comments?.length || 0}
         </button>
       </div>
       {openAnalyze && (
-        <>
+        <div className="ai-review-summary">
           {loadingAnalyze ? (
-            <>Loading in progress ... </>
+            <p className="loading-text">Analyzing comments...</p>
           ) : (
             <>
               {aiReviewSummary && (
-                <div className="ai-review-summary">
+                <>
                   <h4>🔎 AI Review Summary</h4>
                   <p>👍 Positive Comments: {aiReviewSummary.positiveCount}</p>
                   <p>👎 Negative Comments: {aiReviewSummary.negativeCount}</p>
@@ -242,11 +251,11 @@ export default function ViewPost({
                   <p>
                     🧠 Overall Sentiment: {aiReviewSummary.overallSentiment}
                   </p>
-                </div>
+                </>
               )}
             </>
           )}
-        </>
+        </div>
       )}
       {openComment && (
         <>
@@ -258,6 +267,7 @@ export default function ViewPost({
                 placeholder="Search in comments..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                aria-label="Search comments"
               />
               <i className="fa-solid fa-search search-icon"></i>
             </div>
@@ -268,6 +278,7 @@ export default function ViewPost({
                 className="comment-filter"
                 value={commentFilter}
                 onChange={(e) => setCommentFilter(e.target.value)}
+                aria-label="Sort comments"
               >
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>

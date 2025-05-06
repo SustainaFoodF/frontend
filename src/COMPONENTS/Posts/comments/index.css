@@ -1,7 +1,22 @@
+/* Comments area styling */
 .comments-area {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 25px;
   width: 100%;
+  max-width: 700px; /* Match post form width */
   padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f8fafc; /* Light background */
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .comments-area {
+    padding: 15px;
+    margin: 10px;
+  }
 }

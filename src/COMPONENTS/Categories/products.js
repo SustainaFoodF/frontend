@@ -1,22 +1,53 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./productCard";
+import axios from "axios";
 
 export default function ProductsComponent({ products, setReloadNavbar }) {
   const [search, setSearch] = useState("");
-  const [filtredProducts, setFiltredProdcuts] = useState(products);
-  console.log(products);
+  const [filtredProducts, setFiltredProducts] = useState(products);
+  const [promoProducts, setPromoProducts] = useState([]);
+  const [promoLoading, setPromoLoading] = useState(true);
+
+  const isNotExpired = (product) => {
+    if (!product.dateExp) return true;
+    const expirationDate = new Date(product.dateExp);
+    const today = new Date();
+    return expirationDate >= today;
+  };
+
   useEffect(() => {
     if (products) {
+      const nonExpiredProducts = products.filter(isNotExpired);
       if (search === "") {
-        setFiltredProdcuts(products);
+        setFiltredProducts(nonExpiredProducts);
       } else {
-        const newProducts = products.filter((e) =>
+        const newProducts = nonExpiredProducts.filter((e) =>
           e.label.toLowerCase().includes(search.toLowerCase())
         );
-        setFiltredProdcuts(newProducts);
+        setFiltredProducts(newProducts);
       }
     }
   }, [search, products]);
+
+  useEffect(() => {
+    const fetchPromoProducts = async () => {
+      setPromoLoading(true);
+      try {
+        const response = await axios.get("http://localhost:5001/product/promo-products");
+        const nonExpiredPromoProducts = response.data.filter(isNotExpired);
+        setPromoProducts(nonExpiredPromoProducts);
+      } catch (error) {
+        console.error("Erreur API promo-products :", error);
+        const localPromoProducts = products.filter(p => p.isPromo && isNotExpired(p));
+        setPromoProducts(localPromoProducts);
+      } finally {
+        setPromoLoading(false);
+      }
+    };
+
+    fetchPromoProducts();
+  }, [products]);
+
   return (
     <>
       <div className="searchbar">
@@ -44,13 +75,32 @@ export default function ProductsComponent({ products, setReloadNavbar }) {
           </svg>
         </button>
       </div>
+
+      <h2>Produits en Promotion</h2>
+      <div className="promo-products">
+        {promoLoading ? (
+          <p>Chargement des produits en promotion...</p>
+        ) : promoProducts.length > 0 ? (
+          promoProducts.map((item, index) => (
+            <ProductCard
+              product={item}
+              key={item._id || index}
+              setReloadNavbar={setReloadNavbar}
+            />
+          ))
+        ) : (
+          <p>Aucun produit en promotion actuellement.</p>
+        )}
+      </div>
+
+      <h2>Nos Produits</h2>
       <div className="products">
         {filtredProducts
-          .filter((p) => p.quantity > 0)
+          .filter((p) => p.quantity > 0 && !p.isPromo) // Afficher uniquement les produits non en promotion
           .map((item, index) => (
             <ProductCard
               product={item}
-              key={index}
+              key={item._id || index}
               setReloadNavbar={setReloadNavbar}
             />
           ))}

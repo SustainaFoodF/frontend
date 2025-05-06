@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/ReactToastify.css';
 import GeminiChat from './COMPONENTS/GeminiChat';
+import TawkIo from './COMPONENTS/TawkIo';
+import WhatsAppButton from './COMPONENTS/WhatsAppButton';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +15,8 @@ root.render(
     <BrowserRouter>
       <App />
       <GeminiChat />
+      <TawkIo />
+      <WhatsAppButton />
     </BrowserRouter>
   </React.StrictMode>
 );

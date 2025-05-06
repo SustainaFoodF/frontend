@@ -1,6 +1,6 @@
 import { jsPDF } from "jspdf";
-import { useState, useEffect, useMemo } from "react";
-import logo from '../../ASSETS/logo.png'; // ✅ Assure-toi que ce chemin est correct
+import { useState, useMemo } from "react";
+import logo from '../../ASSETS/logo.png'; // ✅ Vérifie que ce chemin est correct
 
 export default function CommandClientView({ data }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,60 +12,61 @@ export default function CommandClientView({ data }) {
       day: "numeric",
     });
 
-    const generatePDF = () => {
-      setIsLoading(true);
-      const doc = new jsPDF();
-    
-      const img = new Image();
-      img.src = logo;
-    
-      img.onload = () => {
-        // Logo et en-tête
-        doc.addImage(img, "PNG", 10, 10, 30, 30);
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(18);
-        doc.text("My Orders - Sahar Gaiche", 50, 20); // Remplace avec nom utilisateur si dispo
-    
-        doc.setFontSize(11);
-        const today = new Date().toLocaleDateString("en-GB");
-        doc.text(`Date: ${today}`, 50, 28);
-    
-        let y = 50;
-    
-        data.forEach((command, index) => {
-          // Encadré pour chaque commande
-          doc.setFillColor(245, 245, 245);
-          doc.rect(10, y, 190, 30, "F");
-    
-          const productLines = command.products.map(
-            (p) =>
-              `${p.product.label} / ${p.product.owner.name} (${p.product.prix.toFixed(2)} x ${p.quantity})`
-          );
-    
-          doc.setFont("helvetica", "normal");
-          doc.setFontSize(12);
-          doc.text("Products:", 15, y + 7);
-          doc.setFontSize(11);
-          doc.text(doc.splitTextToSize(productLines.join(", "), 180), 25, y + 14);
-    
-          doc.text("Delivery Date:", 15, y + 24);
-          doc.text(formatDate(command.dateLivraison), 55, y + 24);
-    
-          doc.text("Total Price:", 130, y + 24);
-          doc.text(`${command.totalPrice.toFixed(2)} Dt`, 170, y + 24, { align: "right" });
-    
-          y += 40;
-          if (y > 260) {
-            doc.addPage();
-            y = 20;
-          }
+  const generatePDF = () => {
+    setIsLoading(true);
+    //const ownerName = data?.[0]?.products?.[0]?.product?.owner?.name || "User";
+
+    const doc = new jsPDF();
+    const img = new Image();
+    img.src = logo;
+
+    img.onload = () => {
+      doc.addImage(img, "PNG", 10, 10, 30, 30);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.text(`My Orders `, 50, 20);
+
+      doc.setFontSize(11);
+      const today = new Date().toLocaleDateString("en-GB");
+      doc.text(`Date: ${today}`, 50, 28);
+
+      let y = 50;
+
+      data.forEach((command) => {
+        doc.setFillColor(245, 245, 245);
+        doc.rect(10, y, 190, 30, "F");
+
+        const productLines = command.products.map((p) => {
+          const label = p?.product?.label || "N/A";
+          const ownerName = p?.product?.owner?.name || "N/A";
+          const price = p?.product?.prix?.toFixed(2) || "0.00";
+          const quantity = p?.quantity || 0;
+          return `${label} / ${ownerName} (${price} x ${quantity})`;
         });
-    
-        doc.save("my_orders.pdf");
-        setIsLoading(false);
-      };
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+        doc.text("Products:", 15, y + 7);
+        doc.setFontSize(11);
+        doc.text(doc.splitTextToSize(productLines.join(", "), 180), 25, y + 14);
+
+        doc.text("Delivery Date:", 15, y + 24);
+        doc.text(formatDate(command.dateLivraison), 55, y + 24);
+
+        doc.text("Total Price:", 130, y + 24);
+        doc.text(`${command.totalPrice.toFixed(2)} Dt`, 170, y + 24, { align: "right" });
+
+        y += 40;
+        if (y > 260) {
+          doc.addPage();
+          y = 20;
+        }
+      });
+
+      doc.save("my_orders.pdf");
+      setIsLoading(false);
     };
-    
+  };
 
   const getRecommendations = (data) => {
     const sellerProducts = {};
@@ -73,9 +74,10 @@ export default function CommandClientView({ data }) {
 
     data.forEach((command) => {
       command.products.forEach(({ product }) => {
+        if (!product || !product.owner) return;
         const seller = product.owner.name;
         if (!sellerProducts[seller]) sellerProducts[seller] = [];
-        product.owner && sellerProducts[seller].push(product);
+        sellerProducts[seller].push(product);
       });
     });
 
@@ -129,8 +131,8 @@ export default function CommandClientView({ data }) {
                   <ul style={{ margin: 0, paddingLeft: "16px" }}>
                     {command.products.map((p, k) => (
                       <li key={k}>
-                        {p.product.label} / {p.product.owner.name} :{" "}
-                        {p.product.prix.toFixed(2)} x {p.quantity}
+                        {(p?.product?.label || "N/A")} / {(p?.product?.owner?.name || "N/A")} :{" "}
+                        {(p?.product?.prix?.toFixed(2) || "0.00")} x {(p?.quantity || 0)}
                       </li>
                     ))}
                   </ul>
@@ -165,7 +167,7 @@ export default function CommandClientView({ data }) {
                   {prod.label}
                 </h4>
                 <p style={{ color: "#8c3b22", fontWeight: "bold" }}>
-                  {prod.prix.toFixed(2)} Dt
+                  {prod.prix?.toFixed(2)} Dt
                 </p>
               </div>
             ))}

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { addProductToCart } from "../../services/cartService";
 import { getNutritionInfo } from "../../services/nutritionService";
-import './productCard.css';
-
+import "./productCard.css";
 
 export default function ProductCard({ product, index, setReloadNavbar }) {
   const [showCountOption, setShowCountOption] = useState(false);
@@ -25,9 +24,9 @@ export default function ProductCard({ product, index, setReloadNavbar }) {
     } catch (error) {
       console.error("Failed to fetch nutrition info:", error);
       setNutritionInfo({
-        error: "Impossible de charger les informations nutritionnelles"
+        error: "Impossible de charger les informations nutritionnelles",
       });
-      setShowNutrition(true); // Montre quand même la section avec le message d'erreur
+      setShowNutrition(true);
     }
   };
 
@@ -40,16 +39,29 @@ export default function ProductCard({ product, index, setReloadNavbar }) {
       <div className="s1">
         <img
           src={`http://localhost:5001/uploads/${product.image}`}
-          alt={"no img"}
+          alt={product.label}
         />
       </div>
       <div className="s2">
-        <h3>{product.prix} DT</h3>
+        {product.isPromo ? (
+          <h3>
+            <span className="old-price">{product.prix.toFixed(2)} DT</span>
+            <span className="new-price">{product.nouveauPrix.toFixed(2)} DT</span>
+          </h3>
+        ) : (
+          <h3>{product.prix.toFixed(2)} DT</h3>
+        )}
         <p>{product.label}</p>
       </div>
       <div className="s3">
-        <p>Quantite : {product.quantity}</p>
+        <p>Quantité : {product.quantity}</p>
       </div>
+
+      {product.isPromo && (
+        <div className="promo-message">
+          <p>Profitez de cette offre spéciale avant qu'elle n'expire !</p>
+        </div>
+      )}
 
       {showCountOption ? (
         <div className="addbtn">
@@ -110,31 +122,36 @@ export default function ProductCard({ product, index, setReloadNavbar }) {
         </div>
       )}
 
-<div className="nutrition-section">
-  {!showNutrition ? (
-    <button className="nutrition-btn show-btn" onClick={handleShowNutrition}>
-      Show Nutrition Info
-    </button>
-  ) : (
-    <div className="nutrition-info">
-      <h4>Nutrition Information:</h4>
-      {nutritionInfo ? (
-        <ul>
-          <li>Calories: {nutritionInfo.calories}</li>
-          <li>Proteins: {nutritionInfo.proteins}g</li>
-          <li>Fats: {nutritionInfo.fats}g</li>
-          <li>Carbs: {nutritionInfo.carbs}g</li>
-        </ul>
-      ) : (
-        <p>Loading nutrition info...</p>
-      )}
-      <button className="nutrition-btn hide-btn" onClick={handleHideNutrition}>
-        Hide Nutrition Info
-      </button>
-    </div>
-  )}
-</div>
-
+      <div className="nutrition-section">
+        {!showNutrition ? (
+          <button
+            className="nutrition-btn show-btn"
+            onClick={handleShowNutrition}
+          >
+            Show Nutrition Info
+          </button>
+        ) : (
+          <div className="nutrition-info">
+            <h4>Nutrition Information:</h4>
+            {nutritionInfo ? (
+              <ul>
+                <li>Calories: {nutritionInfo.calories}</li>
+                <li>Proteins: {nutritionInfo.proteins}g</li>
+                <li>Fats: {nutritionInfo.fats}g</li>
+                <li>Carbs: {nutritionInfo.carbs}g</li>
+              </ul>
+            ) : (
+              <p>Loading nutrition info...</p>
+            )}
+            <button
+              className="nutrition-btn hide-btn"
+              onClick={handleHideNutrition}
+            >
+              Hide Nutrition Info
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

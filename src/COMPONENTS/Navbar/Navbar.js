@@ -13,9 +13,6 @@ const Navbar = ({ reloadnavbar }) => {
     localStorage.getItem("token") !== null;
   const userRole = localStorage.getItem("userRole");
   const [categories, setCategories] = useState([]);
-  const [shows3, setshows3] = useState(false);
-  const [search, setsearch] = useState("");
-  const [scrolled, setScrolled] = useState(false);
 
   const fetchCategories = async () => {
     const response = await getAllCategories();
@@ -47,37 +44,22 @@ const Navbar = ({ reloadnavbar }) => {
     navigate("/login", { replace: true });
   };
 
-  const navigateHome = () => {
-    if (userRole === "livreur") {
-      navigate("/livreur");
-    } else {
-      navigate("/");
-    }
-  };
-
-  useEffect(() => {
-    let ticking = false;
-    
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const isScrolled = window.scrollY > 10;
-          if (isScrolled !== scrolled) {
-            setScrolled(isScrolled);
-          }
-          ticking = false;
-        });
-        ticking = true;
+  // Add this function to handle home navigation based on user role
+    const navigateHome = () => {
+      if (userRole === "livreur") {
+        navigate("/livreur");
+      } else {
+        navigate("/");
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrolled]);
+  const [shows3, setshows3] = useState(false);
+  const [search, setsearch] = useState("");
 
   return (
-    <nav className={scrolled ? "scrolled" : ""}>
+    <nav>
       <div className="s1">
+        {/* Update the logo click to use navigateHome */}
         <img 
           src={logo} 
           alt="logo" 
@@ -151,6 +133,7 @@ const Navbar = ({ reloadnavbar }) => {
       </div>
 
       <div className="s2">
+        {/* Update Home link to use navigateHome */}
         <span onClick={navigateHome} style={{ cursor: "pointer" }}>Home</span>
         
         <Dropdown>
@@ -185,7 +168,7 @@ const Navbar = ({ reloadnavbar }) => {
         </Dropdown>
       </div>
 
-      <div className={`s3 ${shows3 ? "expanded" : ""}`}>
+      <div className="s3">
         <div className="s31">
           <img 
             src={logo} 
@@ -210,54 +193,6 @@ const Navbar = ({ reloadnavbar }) => {
             />
           </svg>
         </div>
-
-        {shows3 && (
-          <ul>
-            <li onClick={navigateHome}>Home</li>
-            <li className="primary">
-              <Dropdown>
-                <Dropdown.Toggle as="div" className="dropdown-toggle-mobile">
-                  Categories
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {categories.map((cat) => (
-                    <Dropdown.Item key={cat._id} as={Link} to={`/categories/${cat._id}`}>
-                      {cat.label}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </li>
-            <li>
-              <Link to="/about">About Us</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact Us</Link>
-            </li>
-            {userRole === "client" && (
-              <li className="primary">
-                <Link to="/cart">Cart ({cartquantity})</Link>
-              </li>
-            )}
-            {isLoggedUser ? (
-              <>
-                <li>
-                  <Link to={`/${userRole}/accountsettings`}>Profile</Link>
-                </li>
-                <li onClick={handleLogout}>Logout</li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-                <li>
-                  <Link to="/signup">Signup</Link>
-                </li>
-              </>
-            )}
-          </ul>
-        )}
       </div>
     </nav>
   );

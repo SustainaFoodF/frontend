@@ -22,6 +22,15 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ContactUs from "./pages/ContactUs";
 
+
+import LoginFace from "./FaceRecog/pages/Login";
+import UserSelect from "./FaceRecog/pages/UserSelect";
+import Protected from "./FaceRecog/pages/Protected";
+
+
+
+
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const clientId = "25896799255-5aeddf554q7636tdd7t16ifbah7us55f.apps.googleusercontent.com";
@@ -64,6 +73,27 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/confirm/:confirmationCode" element={<Activation />} />
           <Route path="/resetpassword/:token" element={<ResetPassword />} />
+
+// Face Recog Routes 
+
+
+
+<Route path="user-select" element={<UserSelect />} />
+        <Route path="loginface" element={<LoginFace />} />
+        <Route path="protected" element={<Protected />} />
+        <Route path="*" element={<Navigate to="/" />} />
+
+
+
+        <Route path="client-dashboard" element={<UserProfile />} />
+        
+        <Route path="business-dashboard" element={<BusinessProfile />} />
+
+        <Route path="livreur-dashboard" element={<LivreurProfile />} />
+
+
+
+
         </Routes>
       </GoogleOAuthProvider>
     </div>

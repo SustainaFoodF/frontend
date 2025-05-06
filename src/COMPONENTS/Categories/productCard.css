@@ -1,53 +1,153 @@
+.product {
+  width: 250px;
+  min-height: 400px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.product:hover {
+  transform: scale(1.02);
+}
+
+.s1 img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.s2 {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.s2 h3 {
+  margin: 5px 0;
+  text-decoration: none; /* Évite que h3 applique un barré global */
+}
+
+.s2 h3 .old-price {
+  color: #888;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+
+.s2 h3 .new-price {
+  color: #e63946;
+  font-weight: bold;
+  text-decoration: none !important; /* Force l'absence de barré pour le nouveau prix */
+}
+
+.s3 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.promo-message {
+  color: #e63946;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.addbtn {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.addbtn svg {
+  cursor: pointer;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qty button:hover {
+  background-color: #0056b3;
+}
+
+.addtocart,
+.cancelFromCard {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addtocart:hover,
+.cancelFromCard:hover {
+  background-color: #0056b3;
+}
+
 .nutrition-btn {
-    background-color: #4CAF50; /* green base color */
-    border: none;
-    color: white;
-    padding: 6px 12px; /* smaller padding */
-    font-size: 12px; /* smaller font */
-    border-radius: 6px; /* small rounded corners */
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    width: auto; /* button size depends on text */
-    max-width: 90%; /* no overflow */
-    margin: 8px 0;
-  }
-  
-  .nutrition-btn:hover {
-    background-color: #45a049;
-  }
-  
-  /* Specific styles for each button */
-  .show-btn {
-    background-color: #007BFF;
-  }
-  
-  .show-btn:hover {
-    background-color: #0069d9;
-  }
-  
-  .hide-btn {
-    background-color: #dc3545;
-  }
-  
-  .hide-btn:hover {
-    background-color: #c82333;
-  }
-  .product {
-    width: 250px; /* 👈 agrandir la largeur (avant c'était peut-être 180px ou 200px ?) */
-    min-height: 400px; /* 👈 assurer une hauteur confortable */
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between; /* bien espacer */
-    transition: transform 0.2s ease;
-  }
-  
-  .product:hover {
-    transform: scale(1.02); /* un petit zoom au hover pour faire joli */
-  }
-    
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  width: auto;
+  max-width: 90%;
+  margin: 8px 0;
+}
+
+.nutrition-btn:hover {
+  background-color: #45a049;
+}
+
+.show-btn {
+  background-color: #007BFF;
+}
+
+.show-btn:hover {
+  background-color: #0069d9;
+}
+
+.hide-btn {
+  background-color: #dc3545;
+}
+
+.hide-btn:hover {
+  background-color: #c82333;
+}
+
+.nutrition-info {
+  margin-top: 8px;
+  text-align: left;
+}
+
+.nutrition-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.promo-products,
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

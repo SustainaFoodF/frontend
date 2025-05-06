@@ -15,8 +15,6 @@ const FoodGenerator = () => {
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
 
-  const API_KEY = "b7b9e5d40991478da4c131d80c6366a4";
-
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setImages((prev) => [...prev, ...files]);
@@ -109,12 +107,11 @@ const FoodGenerator = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            "apiKey": API_KEY, // <-- Clé API ajoutée ici
           },
         }
       );
 
-      const ingredients = response.data.detectedIngredients || [];
+      const ingredients = response.data.detectedIngredients;
       setDetectedIngredients(ingredients);
 
       const statusMap = simulateIngredientStatuses(ingredients);

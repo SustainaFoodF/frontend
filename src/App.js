@@ -26,6 +26,8 @@ import ContactUs from "./pages/ContactUs";
 import LoginFace from "./FaceRecog/pages/Login";
 import UserSelect from "./FaceRecog/pages/UserSelect";
 import Protected from "./FaceRecog/pages/Protected";
+import TaskDetail from "../src/COMPONENTS/Livreur/components/TaskDetail";
+import BusinessTasksDashboard from "./COMPONENTS/Business/BusinessTasksDashboard";
 
 
 
@@ -65,7 +67,7 @@ function App() {
           <Route path="/livreur/:activepage" element={<LivreurProfile />}  />
 
 
-
+<Route path="/business/tasks" element={<PrivateRoute element={<BusinessTasksDashboard />} />} />
 
           <Route path="/business/:activepage" element={<BusinessProfile />} />
           <Route path="/categories/:categoryId" element={<ClientCategory />} />
@@ -74,7 +76,6 @@ function App() {
           <Route path="/confirm/:confirmationCode" element={<Activation />} />
           <Route path="/resetpassword/:token" element={<ResetPassword />} />
 
-// Face Recog Routes 
 
 
 
@@ -91,6 +92,7 @@ function App() {
 
         <Route path="livreur-dashboard" element={<LivreurProfile />} />
 
+        <Route path="/livreur/tasks/:id" element={<TaskDetail />} />
 
 
 

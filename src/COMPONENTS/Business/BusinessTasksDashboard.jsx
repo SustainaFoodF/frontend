@@ -1,33 +1,29 @@
-// TaskDashboard.jsx
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import TaskCard from './TaskCard';
-import '../styles.css';
-import './TaskDashboard.css';
-import { getLivreurTasks } from '../../../services/api';
 
-const TaskDashboard = () => {
+import { getBusinessTasks } from '../../services/api';
+import BusinessTaskCard from './BusinessTaskCard';
+
+const BusinessTaskDashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [livreurId, setLivreurId] = useState('');
-  const navigate = useNavigate();
+  const [BusinessId, setBusinessId] = useState('');
 
   useEffect(() => {
     const id = localStorage.getItem('loggedInUserId');
     if (id) {
-      setLivreurId(id);
+      setBusinessId(id);
     }
   }, []);
 
   useEffect(() => {
     const fetchTasks = async () => {
-      if (!livreurId) return;
+      if (!BusinessId) return;
       
       try {
         setLoading(true);
-        const response = await getLivreurTasks(livreurId);
+        const response = await getBusinessTasks(BusinessId);
         setTasks(response.data.data || response.data);
         setError(null);
       } catch (err) {
@@ -39,14 +35,14 @@ const TaskDashboard = () => {
     };
 
     fetchTasks();
-  }, [livreurId]);
+  }, [BusinessId]);
 
   const filteredTasks = filter === "All" 
     ? tasks 
     : tasks.filter(task => task.status === filter);
 
   return (
-    <div className="task-dashboard-container">
+    <main className="main-content">
       <div className="dashboard-header">
         <h1>Your Delivery Tasks</h1>
         <div className="filter-container">
@@ -69,22 +65,16 @@ const TaskDashboard = () => {
       ) : error ? (
         <div className="error">{error}</div>
       ) : filteredTasks.length > 0 ? (
-        <div className="task-grid">
+        <div className="task-list">
           {filteredTasks.map((task) => (
-            <TaskCard 
-              key={task._id} 
-              task={task} 
-              onClick={() => navigate(`/livreur/tasks/${task._id}`)}
-            />
+            <BusinessTaskCard key={task._id} task={task} />
           ))}
         </div>
       ) : (
-        <div className="no-tasks">
-          <p>No tasks match the selected filter.</p>
-        </div>
+        <p>No tasks match the selected filter.</p>
       )}
-    </div>
+    </main>
   );
 };
 
-export default TaskDashboard;
+export default BusinessTaskDashboard;

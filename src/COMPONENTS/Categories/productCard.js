@@ -1,13 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addProductToCart } from "../../services/cartService";
 import { getNutritionInfo } from "../../services/nutritionService";
+import { StarRatingDisplay, StarRatingInput } from "./StarRating";
+import { addReview, getProductReviews } from "../../services/reviewService";
 import "./productCard.css";
 
-export default function ProductCard({ product, index, setReloadNavbar }) {
+export default function ProductCard({ product, index, setReloadNavbar, currentUser }) {
   const [showCountOption, setShowCountOption] = useState(false);
   const [count, setCount] = useState(0);
   const [nutritionInfo, setNutritionInfo] = useState(null);
   const [showNutrition, setShowNutrition] = useState(false);
+  const [userRating, setUserRating] = useState(0);
+  const [showRatingInput, setShowRatingInput] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [averageRating, setAverageRating] = useState(product.averageRating || 0);
+  const [reviewCount, setReviewCount] = useState(product.reviews?.length || 0);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const { reviews, averageRating } = await getProductReviews(product._id);
+        setAverageRating(averageRating);
+        setReviewCount(reviews.length);
+        const userReview = reviews.find(r => r.user._id === currentUser?._id);
+        if (userReview) setUserRating(userReview.rating);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+    fetchReviews();
+  }, [product._id, currentUser]);
 
   const handleAddToCart = () => {
     addProductToCart(product, count);
@@ -34,6 +56,22 @@ export default function ProductCard({ product, index, setReloadNavbar }) {
     setShowNutrition(false);
   };
 
+  const submitRating = async () => {
+    if (userRating === 0) return;
+    setIsLoading(true);
+    try {
+      await addReview(product._id, userRating);
+      const { reviews, averageRating } = await getProductReviews(product._id);
+      setAverageRating(averageRating);
+      setReviewCount(reviews.length);
+      setShowRatingInput(false);
+    } catch (error) {
+      console.error("Error submitting rating:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="product" key={index}>
       <div className="s1">
@@ -52,6 +90,12 @@ export default function ProductCard({ product, index, setReloadNavbar }) {
           <h3>{product.prix.toFixed(2)} DT</h3>
         )}
         <p>{product.label}</p>
+        
+        {/* Nouveau: Affichage des étoiles */}
+        <div className="rating-section">
+          <StarRatingDisplay rating={averageRating} />
+          <span className="rating-count">({reviewCount} avis)</span>
+        </div>
       </div>
       <div className="s3">
         <p>Quantité : {product.quantity}</p>
@@ -62,6 +106,27 @@ export default function ProductCard({ product, index, setReloadNavbar }) {
           <p>Profitez de cette offre spéciale avant qu'elle n'expire !</p>
         </div>
       )}
+
+      {/* Nouveau: Contrôles de notation */}
+      <div className="rating-controls">
+        <button className="rate-button" onClick={() => setShowRatingInput(!showRatingInput)}>
+          Rate this product
+        </button>
+
+        {showRatingInput && (
+          <div className="rating-input-container">
+            <StarRatingInput rating={userRating} setRating={setUserRating} />
+            <div className="rating-buttons">
+              <button className="submit-rating" onClick={submitRating} disabled={isLoading}>
+                {isLoading ? "Envoi..." : "Submit"}
+              </button>
+              <button className="cancel-rating" onClick={() => setShowRatingInput(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
 
       {showCountOption ? (
         <div className="addbtn">

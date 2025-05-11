@@ -66,12 +66,12 @@ const LivreurNavbar = () => {
         </div>
       </div>
 
-      <div className="s2 livreur-links">
-        <Link to="/livreur">Dashboard</Link>
-        <Link to="/livreur/orders">My Deliveries</Link>
-        <Link to="/livreur/availability">Availability</Link>
-        <Link to="/livreur/stats">Statistics</Link>
-      </div>
+        <div className="s2 livreur-links">
+          <Link to="/livreur">My Tasks</Link>
+          <Link to="/livreur/availability">Availability</Link>
+          <Link to="/livreur/history">Statistics</Link>
+          <Link to="/livreur/accountsettings">Profile</Link>
+        </div>
     </nav>
   );
 };

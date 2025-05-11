@@ -1,8 +1,14 @@
 import { jsPDF } from "jspdf";
 import { useState } from "react";
+import TaskCreationForm from '../Business/TaskCreationForm';
+
+
+
 
 export default function CommandBusinessView({ data }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [showTaskForm, setShowTaskForm] = useState(false);
+  const [selectedCommand, setSelectedCommand] = useState(null);
 
   const calculateTotal = (command) =>
     command.products.reduce(
@@ -102,10 +108,32 @@ export default function CommandBusinessView({ data }) {
                 </td>
                 <td style={styles.td}>{formatDate(command.dateLivraison)}</td>
                 <td style={styles.td}>{calculateTotal(command).toFixed(2)}</td>
+                                <td><button 
+                  onClick={() => {
+                    setSelectedCommand(command);
+                    setShowTaskForm(true);
+                  }}
+                  className="assign-button"
+                >
+                  Create Delivery Task
+                </button></td>
               </tr>
             ))}
           </tbody>
         </table>
+        {showTaskForm && (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <button onClick={() => setShowTaskForm(false)} className="close-button">
+        ×
+      </button>
+      <TaskCreationForm 
+      command={selectedCommand} 
+      onClose={() => setShowTaskForm(false)}
+    />
+    </div>
+  </div>
+)}
       </div>
     </div>
   );

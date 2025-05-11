@@ -46,7 +46,6 @@ export const markNotificationAsRead = (notificationId) => {
   return api.post(`/notifications/${notificationId}/read`);
 };
 
-// Add these to your existing api.js
 export const getUnreadNotifications = () => {
   return api.get('/notifications/unread');
 };
@@ -57,4 +56,8 @@ export const markAllAsRead = () => {
 
 export const deleteNotification = (notificationId) => {
   return api.delete(`/notifications/${notificationId}`);
+};
+
+export const getBusinessTasks = (businessId) => {
+  return api.get(`/livreur/tasks/business/${businessId}`);
 };

@@ -66,28 +66,16 @@ Mode                       LastWriteTime           Length  Name*
 
 d-----        06/02/2025     15:08                node\_modules
 
-
 d-----        06/02/2025     15:07                public
-
 
 d-----        06/02/2025     15:07                src
 
-
 -a----        07/02/2025     12:39            245 .env
 
-
 -a----        06/02/2025     15:07            242 .gitignore
-
-
 -a----        06/02/2025     15:08         802810 package-lock.json
-
-
 -a----        06/02/2025     15:07           2007 package.json
-
-
 -a----        06/02/2025     15:07           3359 README.md
-
-
 -a----        06/02/2025     15:07             96 vercel.json
 
 
@@ -98,11 +86,24 @@ Port:
 The application runs on port 3001.
 
 🌐 Port
+
+
 The application runs on port 3001.
+
+
 🛠 Technologies Used
+
+
 ⚛️ React – Front-end library used to build the UI
+
+
 🌐 Axios – Promise-based HTTP client for browser requests
+
+
 🍃 MongoDB – NoSQL database used by the backend
+
+
+
 📘 Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

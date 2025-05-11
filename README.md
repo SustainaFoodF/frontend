@@ -1,20 +1,11 @@
 ⚛️ SustainaFood – Frontend
 
 
-
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge\&logo=nodedotjs\&logoColor=white)
-
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge\&logo=express\&logoColor=white)
-
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge\&logo=mongodb\&logoColor=white)
-
-
 ![VS Code](https://img.shields.io/badge/VS--Code-007ACC?style=for-the-badge\&logo=visual-studio-code\&logoColor=white)
-
-
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge\&logo=jest\&logoColor=white)
-
-
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge\&logo=javascript\&logoColor=black)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -65,31 +56,54 @@ Instead, it will copy all the configuration files and the transitive dependencie
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 Project Structure
-Mode                    LastWriteTime         Length  Name
+
+
+
+
+Mode                       LastWriteTime           Length  Name*
 
 ---
 
 d-----        06/02/2025     15:08                node\_modules
+
+
 d-----        06/02/2025     15:07                public
+
+
 d-----        06/02/2025     15:07                src
+
+
 -a----        07/02/2025     12:39            245 .env
+
+
 -a----        06/02/2025     15:07            242 .gitignore
+
+
 -a----        06/02/2025     15:08         802810 package-lock.json
+
+
 -a----        06/02/2025     15:07           2007 package.json
+
+
 -a----        06/02/2025     15:07           3359 README.md
+
+
 -a----        06/02/2025     15:07             96 vercel.json
 
+
+
 Port:
+
+
 The application runs on port 3001.
 
-Technologies Used:
-React: The front-end library used to build the UI.
-
-Axios: A promise-based HTTP client for the browser used to make API requests.
-
-MongoDB: A NoSQL database to store data.
-
-## Learn More
+🌐 Port
+The application runs on port 3001.
+🛠 Technologies Used
+⚛️ React – Front-end library used to build the UI
+🌐 Axios – Promise-based HTTP client for browser requests
+🍃 MongoDB – NoSQL database used by the backend
+📘 Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 

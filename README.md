@@ -60,23 +60,17 @@ Project Structure
 
 
 
-Mode                       LastWriteTime           Length  Name*
+.
+├── node_modules/
+├── public/
+├── src/
+├── .env
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+└── vercel.json
 
----
-
-d-----        06/02/2025     15:08                node\_modules
-
-d-----        06/02/2025     15:07                public
-
-d-----        06/02/2025     15:07                src
-
--a----        07/02/2025     12:39            245 .env
-
--a----        06/02/2025     15:07            242 .gitignore
--a----        06/02/2025     15:08         802810 package-lock.json
--a----        06/02/2025     15:07           2007 package.json
--a----        06/02/2025     15:07           3359 README.md
--a----        06/02/2025     15:07             96 vercel.json
 
 
 

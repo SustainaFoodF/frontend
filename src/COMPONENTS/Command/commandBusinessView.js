@@ -108,7 +108,10 @@ export default function CommandBusinessView({ data }) {
                 </td>
                 <td style={styles.td}>{formatDate(command.dateLivraison)}</td>
                 <td style={styles.td}>{calculateTotal(command).toFixed(2)}</td>
-                                <td><button 
+                <td style={styles.td}>
+                  <button  style={styles.button} 
+                  onMouseOver={(e) => (e.target.style.backgroundColor = "#813e24")}
+                  onMouseOut={(e) => (e.target.style.backgroundColor = "#a04e2e")}
                   onClick={() => {
                     setSelectedCommand(command);
                     setShowTaskForm(true);

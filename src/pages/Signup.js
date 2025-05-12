@@ -51,11 +51,11 @@ function Signup() {
         const { name, email, password, role, image } = signupInfo;
     
         if (!name || !email || !password || !role) {
-            return toast.error('Tous les champs sont obligatoires.');
+            return toast.error('all fields are required');
         }
     
         try {
-            setLoadingSteps(["Vérification de l'existence de l'utilisateur..."]);
+            setLoadingSteps(["Verifying your information...", "Creating your account...", "Almost there..."]);
     
             const response = await fetch('http://localhost:5001/auth/Signup', {
                 method: 'POST',
@@ -78,10 +78,10 @@ function Signup() {
                 console.log("✅ Réponse JSON:", result);
     
                 if (result.success) {
-                    toast.success(result.message || 'Votre compte a été créé avec succès !');
+                    toast.success(result.message || 'Your account has been created successfully !');
                     setTimeout(() => navigate('/login'), 1500);
                 } else {
-                    toast.success(result.message || 'Votre compte a été créé avec succès !');
+                    toast.success(result.message || 'Your account has been created successfully !');
                     setTimeout(() => navigate('/login'), 1500);
                 }
             } catch (error) {
@@ -108,24 +108,24 @@ function Signup() {
                 </div>
 
                 <div className='signup-form'>
-                    <h1>Créer un compte</h1>
-                    <p>Veuillez entrer vos informations personnelles pour continuer</p>
-                    <p>Ou</p>
+                    <h1>Create an Account</h1>
+                    <p>Please enter your information to continue</p>
+                    <p>Or</p>
                     <GoogleLogin
         onSuccess={handleGoogleSuccess}
         onError={() => console.log("Google Sign-In Failed")}
       />
 
                     <form onSubmit={handleSignup}>
-                        <input type='text' name='name' placeholder='Nom Complet' onChange={handleChange} value={signupInfo.name} />
-                        <input type='email' name='email' placeholder='Adresse Email' onChange={handleChange} value={signupInfo.email} />
-                        <input type='password' name='password' placeholder='Mot de passe' onChange={handleChange} value={signupInfo.password} />
+                        <input type='text' name='name' placeholder='Your Name' onChange={handleChange} value={signupInfo.name} />
+                        <input type='email' name='email' placeholder='Email Address' onChange={handleChange} value={signupInfo.email} />
+                        <input type='password' name='password' placeholder='Password' onChange={handleChange} value={signupInfo.password} />
 
                         {signupInfo.image && <img src={signupInfo.image} alt='Preview' className='preview-image' />}
                         <input type='file' accept='image/*' onChange={handleImageChange} className='preview-image' />
 
                         <div className='role-selection'>
-                            <label>Sélectionnez votre rôle</label>
+                            <label> Select Role : </label>
                             <div className='role-options'>
                                 <label className={`role-btn ${signupInfo.role === 'client' ? 'selected' : ''}`}>
                                     <input type='radio' name='role' value='client' checked={signupInfo.role === 'client'} onChange={handleChange} />
@@ -142,8 +142,8 @@ function Signup() {
                             </div>
                         </div>
 
-                        <button type='submit' className='signup-button'>Créer un compte</button>
-                        <p>Déjà un compte ? <Link to='/login'>Se connecter</Link></p>
+                        <button type='submit' className='signup-button'>Create Account</button>
+                        <p>Do you already have an account? <Link to='/login'> Login here </Link></p>
                     </form>
 
                     <div className='loading-steps'>

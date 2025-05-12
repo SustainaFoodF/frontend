@@ -41,7 +41,7 @@ const TaskCreationForm = ({ command, onClose }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [BusinessId, setBusinessId] = useState('');
-
+  const [user, setUserId] = useState('');
   useEffect(() => {
     const id = localStorage.getItem('loggedInUserId');
     if (id) {
@@ -49,13 +49,21 @@ const TaskCreationForm = ({ command, onClose }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const name = localStorage.getItem('loggedInUser');
+    if (name) {
+      setUserId(name);
+    }
+  }, []);
+
+  
   // Parse command data when available
   useEffect(() => {
     if (command) {
       try {
         // Convert command data to task format
         const pickupAddress = command.location || (command.owner?.addresses?.[0]?.street || '');
-        const dropoffAddress = command.owner?.addresses?.[0]?.street || '';
+        const dropoffAddress = command.location || (command.owner?.addresses?.[0]?.street || '');
         
         setFormData(prev => ({
           ...prev,

@@ -50,11 +50,7 @@ const BusinessTaskCard = ({ task }) => {
         </div>
       </div>
 
-      <div className="task-actions">
-        <Link to={`/Business/tasks/${task._id}`} className="view-button">
-          View Details
-        </Link>
-      </div>
+     
     </div>
   );
 };

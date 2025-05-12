@@ -89,20 +89,7 @@ const LivreurSidebar = ({ activepage }) => {
         icon={<span>📜</span>}
         label="Delivery History"
       />
-      <SidebarLink
-        to="/livreur/orders"
-        activePage={activepage}
-        pageName="orders"
-        icon={<span>📦</span>}
-        label="Manage Orders"
-      />
-      <SidebarLink
-        to="/livreur/notifications"
-        activePage={activepage}
-        pageName="notifications"
-        icon={<span>🔔</span>}
-        label="Notifications"
-      />
+
       <SidebarLink
         to="/livreur/weather"
         activePage={activepage}

@@ -1,26 +1,25 @@
-/* NotificationsPanel.css - Adjusted to work with fixed sidebar */
+/* NotificationsPanel.css - Modern, sleek design with improved visuals */
 .notifications-panel {
   position: fixed;
-  top: 60px; /* Below Navbar */
+  top: 42%;
   right: 0;
-  width: 300px;
-  bottom: 20px; /* Reduced bottom spacing for better fit */
-  background: #ffffff;
-  border-left: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 8px 0 0 8px; /* Rounded corners on the left */
-  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.05); /* Softer, more modern shadow */
-  z-index: 200; /* Higher than sidebar */
+  width: 340px;
+  bottom: 20px;
+  background: linear-gradient(145deg, #ffffff, #f9fafb);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px 0 0 12px;
+  box-shadow: -6px 0 25px rgba(0, 0, 0, 0.1);
+  z-index: 200;
   padding: 20px;
   overflow-y: auto;
-  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for opening/closing */
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   box-sizing: border-box;
-  opacity: 1; /* Default state */
+  opacity: 1;
 }
 
-/* Add a hidden state for animation */
 .notifications-panel.hidden {
-  transform: translateX(100%); /* Slide out to the right */
-  opacity: 0; /* Fade out */
+  transform: translateX(100%);
+  opacity: 0;
 }
 
 .notifications-header {
@@ -28,51 +27,54 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  padding-bottom: 10px;
-  z-index: 1;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .notifications-header h3 {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #1f2937;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.5px;
 }
 
 .clear-button {
-  background: #34c759;
-  color: white;
+  background: #10b981;
+  color: #ffffff;
   border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+  padding: 8px 16px;
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 12px;
-  transition: background 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .clear-button:hover {
-  background: #2ea44f;
+  background: #059669;
+  transform: scale(1.05);
 }
 
 .notifications-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .notification-item {
-  padding: 12px;
-  border-radius: 8px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 10px;
+  border-left: 4px solid transparent;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
   cursor: pointer;
-  transition: background 0.2s ease;
 }
 
 .notification-item.unread {
-  background: #f0fdf4;
-  border-left: 3px solid #34c759;
+  background: #ecfdf5;
+  border-left-color: #10b981;
 }
 
 .notification-item.read {
@@ -80,45 +82,106 @@
 }
 
 .notification-item:hover {
-  background: #e5e7eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.notification-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
 .notification-message {
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   color: #1f2937;
-  margin-bottom: 5px;
+  line-height: 1.4;
+  flex-grow: 1;
 }
 
 .notification-time {
   font-size: 12px;
+  font-weight: 400;
   color: #6b7280;
+  white-space: nowrap;
 }
 
 .no-notifications {
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   color: #6b7280;
   text-align: center;
-  padding: 20px;
+  padding: 24px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
 .loading {
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   color: #6b7280;
   text-align: center;
-  padding: 20px;
+  padding: 24px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
-/* Responsive styles */
+@media (max-width: 1024px) {
+  .notifications-panel {
+    width: 300px;
+    top: 20%;
+    bottom: 20px;
+    padding: 16px;
+  }
+
+  .notifications-header h3 {
+    font-size: 20px;
+  }
+
+  .clear-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .notification-message {
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 768px) {
   .notifications-panel {
-    width: calc(100% - 80px); /* Account for collapsed sidebar */
+    width: 90%;
+    right: 5%;
+    top: 80px;
+    bottom: 20px;
+    border-radius: 16px;
   }
 }
 
 @media (max-width: 480px) {
   .notifications-panel {
     width: 100%;
-    bottom: 80px; /* Adjusted for bottom sidebar on mobile */
-    top: 60px;
+    right: 0;
+    left: 0;
+    top: 70px;
+    bottom: 20px;
+    border-radius: 0;
+    padding: 12px;
+  }
+
+  .notification-item {
+    padding: 12px;
+  }
+
+  .notification-message {
+    font-size: 13.5px;
+  }
+
+  .notification-time {
+    font-size: 11px;
   }
 }

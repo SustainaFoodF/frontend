@@ -2,9 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaMapMarkerAlt, FaClock, FaPhone, FaInfoCircle, FaBox, FaMoneyBillWave, FaExchangeAlt } from 'react-icons/fa';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import IssueReportingModal from './IssueReportingModal';
 import '../styles.css';
 import './TaskDetail.css';
+
+// Fix for default Leaflet marker icons in react-leaflet
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+});
 
 const TaskDetail = () => {
   const { id } = useParams();
@@ -14,7 +25,8 @@ const TaskDetail = () => {
   const [error, setError] = useState(null);
   const [showReportModal, setShowReportModal] = useState(false);
   const [activeTab, setActiveTab] = useState('details');
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [pickupCoords, setPickupCoords] = useState(null);
+  const [dropoffCoords, setDropoffCoords] = useState(null);
 
   useEffect(() => {
     const fetchTaskDetails = async () => {
@@ -36,6 +48,36 @@ const TaskDetail = () => {
 
     fetchTaskDetails();
   }, [id]);
+
+  // Geocode addresses to coordinates
+  useEffect(() => {
+    const geocodeAddress = async (address, setCoords) => {
+      if (!address) return;
+      try {
+        // Using OpenStreetMap Nominatim for geocoding (replace with your preferred geocoding API)
+        const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+          params: {
+            q: address,
+            format: 'json',
+            limit: 1
+          }
+        });
+        if (response.data.length > 0) {
+          const { lat, lon } = response.data[0];
+          setCoords([parseFloat(lat), parseFloat(lon)]);
+        }
+      } catch (err) {
+        console.error("Error geocoding address:", err);
+      }
+    };
+
+    if (task?.data?.pickup?.address) {
+      geocodeAddress(task.data.pickup.address, setPickupCoords);
+    }
+    if (task?.data?.dropoff?.address) {
+      geocodeAddress(task.data.dropoff.address, setDropoffCoords);
+    }
+  }, [task]);
 
   const handleStatusUpdate = async (newStatus) => {
     try {
@@ -166,11 +208,34 @@ const TaskDetail = () => {
           </div>
 
           <div className="map-container">
-            <div className="map-placeholder">
-              <div className="map-text">
-                Interactive map would show route from {pickup.address} to {dropoff.address}
+            {pickupCoords && dropoffCoords ? (
+              <MapContainer
+                center={pickupCoords}
+                zoom={13}
+                style={{ height: '400px', width: '100%' }}
+                className="rounded-lg shadow-md"
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={pickupCoords}>
+                  <Popup>Pickup: {pickup.address}</Popup>
+                </Marker>
+                <Marker position={dropoffCoords}>
+                  <Popup>Dropoff: {dropoff.address}</Popup>
+                </Marker>
+                <Polyline positions={[pickupCoords, dropoffCoords]} color="blue" />
+              </MapContainer>
+            ) : (
+              <div className="map-placeholder">
+                <div className="map-text">
+                  {pickupCoords || dropoffCoords
+                    ? 'Loading map...'
+                    : 'Unable to load map: Invalid address'}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       ) : (

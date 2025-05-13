@@ -86,6 +86,7 @@ export default function CommandBusinessView({ data }) {
               <th style={styles.th}>Products</th>
               <th style={styles.th}>Delivery Date</th>
               <th style={styles.th}>Total Price (Dt)</th>
+              <th style={styles.th}>Action</th>
             </tr>
           </thead>
           <tbody>

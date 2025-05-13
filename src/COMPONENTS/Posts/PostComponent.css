@@ -259,7 +259,67 @@
   font-size: 0.9rem;
   color: #4a5568;
 }
+/* PostComponent.css */
 
+/* File preview */
+.file-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Slightly larger min-width for Facebook-like sizing */
+  gap: 8px; /* Tighter spacing like Facebook */
+  margin: 15px 0;
+}
+
+/* Individual file item (image-specific) */
+.file-item {
+  position: relative;
+  border-radius: 8px; /* Rounded corners like Facebook */
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.2s ease;
+}
+
+.file-item img {
+  width: 100%;
+  height: 120px; /* Fixed height for consistency */
+  object-fit: cover; /* Crop images nicely */
+  border-radius: 8px; /* Match container */
+  aspect-ratio: 1 / 1; /* Square for multiple images */
+}
+
+/* Single image case */
+.file-preview:has(.file-item:nth-child(1):nth-last-child(1)) {
+  grid-template-columns: 1fr; /* Full width for single image */
+  max-width: 500px; /* Cap width like Facebook */
+  margin: 15px auto; /* Center */
+}
+
+.file-preview:has(.file-item:nth-child(1):nth-last-child(1)) .file-item img {
+  height: auto; /* Allow natural height */
+  aspect-ratio: 16 / 9; /* Widescreen for single images */
+  max-height: 350px; /* Limit height */
+}
+
+/* Hover effect for images */
+.file-item:hover {
+  transform: scale(1.02); /* Subtle zoom */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .file-preview {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Smaller grid items */
+    gap: 6px;
+  }
+
+  .file-item img {
+    height: 100px; /* Smaller height for mobile */
+    border-radius: 6px; /* Slightly smaller radius */
+  }
+
+  .file-preview:has(.file-item:nth-child(1):nth-last-child(1)) .file-item img {
+    max-height: 250px; /* Smaller for mobile */
+  }
+}
 /* Animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }

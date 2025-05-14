@@ -20,9 +20,7 @@ function Login() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  if (!location?.state) {
-    return <Navigate to="/" replace={true} />;
-  }
+  
 
   const loadModels = async () => {
     const uri = "/models";

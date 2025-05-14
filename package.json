@@ -17,6 +17,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@vladmandic/face-api": "^1.7.15",
     "@zxing/library": "^0.21.3",
     "apexcharts": "^4.5.0",
     "axios": "^1.9.0",
@@ -44,9 +45,13 @@
     "react-scripts": "^5.0.1",
     "react-to-print": "^3.1.0",
     "react-toastify": "^11.0.5",
+    "rimraf": "^5.0.10",
     "sweetalert2": "^11.6.13",
     "web-vitals": "^2.1.4",
-    "workbox-google-analytics": "^6.6.0"
+    "workbox-background-sync": "^7.3.0",
+    "workbox-build": "^7.3.0",
+    "workbox-cacheable-response": "^7.3.0",
+    "workbox-google-analytics": "^7.3.0"
   },
   "scripts": {
     "start": "cross-env PORT=3001 react-scripts start --openssl-legacy-provider",
@@ -71,5 +76,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }

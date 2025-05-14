@@ -39,7 +39,7 @@ const Sidebar = ({ className }) => {
           </div>
         </Link>
 
-        <Link to="/livreur/history" className="stylenone">
+        <Link to="/livreur/statistiquetasks" className="stylenone">
           <div className={`menu-item ${location.pathname.includes('/livreur/stats') ? 'active' : ''}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

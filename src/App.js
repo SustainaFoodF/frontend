@@ -28,6 +28,7 @@ import UserSelect from "./FaceRecog/pages/UserSelect";
 import Protected from "./FaceRecog/pages/Protected";
 import TaskDetail from "../src/COMPONENTS/Livreur/components/TaskDetail";
 import BusinessTasksDashboard from "./COMPONENTS/Business/BusinessTasksDashboard";
+import LivraisonHistory from "./COMPONENTS/UserProfile/Livraison";
 
 
 
@@ -65,6 +66,7 @@ function App() {
 
           <Route path="/livreur"  element={<Livreurhome />}  />
           <Route path="/livreur/:activepage" element={<LivreurProfile />}  />
+          <Route path="/livreur/statistiquetasks" element={<PrivateRoute element={<LivraisonHistory />} />} />
 
 
 <Route path="/business/tasks" element={<PrivateRoute element={<BusinessTasksDashboard />} />} />
